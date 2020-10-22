@@ -1,0 +1,33 @@
+{
+  "name": "ask-away",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haymanotyealemu/Ask-Away.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/haymanotyealemu/Ask-Away/issues"
+  },
+  "homepage": "https://github.com/haymanotyealemu/Ask-Away#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-validator": "^6.6.1",
+    "gravatar": "^1.8.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.9"
+
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.5"
+  }
+}
