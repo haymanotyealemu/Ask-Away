@@ -18,10 +18,11 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/get_user_by_email/:user_email', async (req, res) => {
+router.get('/email/:user_email', async (req, res) => {
   try {
-    let users = await User.find().select('-password');
-    res.json(users);
+    let userEmail = req.params.user_email;
+    let user = await User.findOne({ email: userEmail }).select('-password');
+    res.json(user);
   } catch (error) {
     console.error(error.message);
     return res.status(500).send('Server error');
@@ -32,6 +33,17 @@ router.get('/users', async (req, res) => {
   try {
     let users = await User.find().select('-password');
     res.json(users);
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).send('Server error');
+  }
+});
+
+router.get('/id/:user_id', async (req, res) => {
+  try {
+    let userId = req.params.user_id;
+    let user = await User.findById(userId).select('-password');
+    res.json(user);
   } catch (error) {
     console.error(error.message);
     return res.status(500).send('Server error');
