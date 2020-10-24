@@ -8,7 +8,7 @@ const gravatar = require('gravatar');
 const jwt = require('jsonwebtoken');
 const authentication = require('../middleware/authentication');
 
-router.get('/', async (req, res) => {
+router.get('/', authentication, async (req, res) => {
   try {
     let user = await User.findById(req.user.id).select('-password');
     res.json(user);
@@ -117,11 +117,11 @@ router.post(
         },
       };
 
-      jwt.toString(
+      jwt.sign(
         payload,
         config.get('SECRET_KEY'),
         { expiresIn: 3600 },
-        (error, token) => {
+        (err, token) => {
           if (err) throw err;
           res.json({ token });
         }
@@ -165,11 +165,11 @@ router.post(
         },
       };
 
-      jwt.toString(
+      jwt.sign(
         payload,
         config.get('SECRET_KEY'),
         { expiresIn: 3600 },
-        (error, token) => {
+        (err, token) => {
           if (err) throw err;
           res.json({ token });
         }
@@ -177,6 +177,129 @@ router.post(
     } catch (error) {
       console.error(error.message);
       return res.status(500).send('Server error');
+    }
+  }
+);
+
+router.put(
+  '/search',
+  [check('searchInput', 'Search is empty').not().isEmpty()],
+
+  async (req, res) => {
+    try {
+      let { searchValue } = req.body;
+      let errors = validationResult(req);
+
+      if (!errors.isEmpty())
+        return res.status(404).json({ errors: errors.array() });
+
+      let users = await User.find().select('-password');
+      let searchUsers = users.filter(
+        (user) =>
+          user.userName.toString().toLowerCase().split(' ').join('') ===
+          searchValue.toString().toLowerCase().split(' ').join('')
+      );
+      res.json(searchUsers);
+    } catch (error) {
+      console.error(error.message);
+      return res.status(500).send('Server error');
+    }
+  }
+);
+
+router.put(
+  '/change_user/:user_data_to_change',
+  authentication,
+  [check('changeData', 'Input field is empty').not().isEmpty()],
+  async (req, res) => {
+    try {
+      const { changeData } = req.body;
+      const errors = validationResult(req);
+      let user = await User.findById(req.user.id).select('-password');
+
+      if (!errors.isEmpty())
+        return res.status(404).json({ errors: errors.array() });
+
+      if (!user) return res.status(404).json('User not found');
+
+      let dataToChange = req.params.user_data_to_change.toString();
+
+      if (user[dataToChange] === changeData.toString())
+        return res.status(401).json('This data already exists');
+
+      user[dataToChange] = changeData.toString();
+
+      await user.save();
+
+      res.json('Data has been updated');
+    } catch (error) {
+      console.error(error);
+      return res.status(500).send('Server Error');
+    }
+  }
+);
+
+router.put(
+  '/verify_password',
+  authentication,
+  [
+    check(
+      'verifyPassword',
+      'Password must have between 6 to 12 characters'
+    ).isLength({ min: 6, max: 12 }),
+  ],
+  async (req, res) => {
+    try {
+      const { verifyPassword } = req.body;
+      const errors = validationResult(req);
+      if (!errors.isEmpty())
+        return res.status(404).json({ errors: errors.array() });
+
+      let user = await User.findById(req.user.id);
+
+      let passwordsMatch = await bcrypt.compare(verifyPassword, user.password);
+
+      if (!passwordsMatch)
+        return res.status(401).json('Passwords do not match');
+
+      res.json('Password change succesful');
+    } catch (error) {
+      console.error(error);
+      return res.status(500).send('Server Error');
+    }
+  }
+);
+
+router.put(
+  '/change_password',
+  authentication,
+  [
+    check(
+      'newPassword',
+      'Password must have between 6 to 12 characters'
+    ).isLength({ min: 6, max: 12 }),
+  ],
+  async (req, res) => {
+    try {
+      const { newPassword } = req.body;
+      const errors = validationResult(req);
+      let user = await User.findById(req.user.id).select('-password');
+
+      if (!errors.isEmpty())
+        return res.status(404).json({ errors: errors.array() });
+
+      const salt = await bcrypt.genSalt(10);
+
+      const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+      user.password = hashedPassword;
+
+      await user.save();
+
+      res.json('Password updated');
+    } catch (error) {
+      console.error(error);
+      return res.status(500).send('Server Error');
     }
   }
 );
