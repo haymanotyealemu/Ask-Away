@@ -4,13 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
-    "start:prod": "node server.js",
-    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
-    "client": "cd client && npm run start",
-    "install": "cd client && npm install",
-    "build": "cd client && npm run build",
-    "heroku-postbuild": "npm run build"
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -23,15 +17,16 @@
   },
   "homepage": "https://github.com/haymanotyealemu/Ask-Away#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "config": "^3.3.2",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-validator": "^6.6.1",
+    "gravatar": "^1.8.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.9"
   },
   "devDependencies": {
-    "concurrently": "^5.3.0",
     "nodemon": "^2.0.6"
   }
 }
