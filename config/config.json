@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://hjmk2020:hjmk2020@finalproject.tlxel.mongodb.net/ask-away?retryWrites=true&w=majority",
+    "jsonWebTokenSecret": "helloworld"
+}
