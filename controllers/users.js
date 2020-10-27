@@ -55,13 +55,13 @@ router.post('/register', [
                     id: newUser._id,
                 }
             };
-            jwt.sign(payload, config.get('SECRET_KEY'), {expiresIn: 3600}, (err, token) => {
+            jwt.sign(payload, config.get('jsonWebTokenSecret'), {expiresIn: 3600}, (err, token) => {
                 if(err)throw err;
                 res.json({token});
             })
 
              // here we start checking if the user exist or not and when we take the email we don't need to have password.
-            let user = await (await User.findOne({email})).select('-password');
+            let user = await (await User.findOne({ email })).select('-password');
             if(user){
                 return res.status(401).send("User has already existed"); 
             }
@@ -79,6 +79,48 @@ router.post('/register', [
 );
 /********************************************************************************************************/
 // Here we start the user login route
-
+router.post('/login', [
+    check('email', 'Email is empty').isEmail(),
+    check('password', 'Password must be between 6 to 12 characters').isLength({
+        min: 6,
+        max: 12,
+    }),
+    ],
+    async (req, res) => {
+        try {
+            // The user use the email and password to login
+            let { email,password } = req.body;
+            let errors = validationResult(req);
+            if (!errors.isEmpty()){
+                    return res.status(400).json({ errors: errors.array() });
+                };
+            //
+            let user = await User.findOne({ email });
+            if(!user){
+                return res.status(404).send("User does not exist with this Email address!")
+            }
+            let checkPasswordMatch = await bcrypt.compare(user.password, password);
+            if(!checkPasswordMatch){
+                return res.status(401).json("Password You Entered do not match!");
+            }
+            const salt = await bcrypt.genSalt(10);
+            let hashedPassword = await bcrypt.hash(password, salt);
+            // newUser.password = hashedPassword;
+            // here we gonna create the jsonwebtoken
+            const payload = {
+                user : {
+                    id: user._id,
+                }
+            };
+            jwt.sign(payload, config.get('SECRET_KEY'), {expiresIn: 3600}, (err, token) => {
+                if(err)throw err;
+                res.json({token});
+            });
+        }catch (error){
+            console.log(error.message);
+            return res.status(500).send("Server error");
+        };
+    } 
+);
 
 module.exports = router;
