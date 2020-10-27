@@ -7,6 +7,19 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 // A library to generate Gravatar URLs in Node.js Based on gravatar specs -
 const gravatar = require('gravatar');
+const authentication = require('../middleware/authentication');
+
+// Here we start the get requests
+router.get('/', authentication, async (req, res) => {
+    try {
+        let user = await (await User.findById(req.user.id)).isSelected('-password');
+        res.json(user);
+    } catch (error) {
+        console.error(error.message);
+        return res.status(500).send('Server error');
+        
+    }
+})
 
 // Here we start the user register request route
 router.post('/register', [
@@ -72,7 +85,7 @@ router.post('/register', [
             }
 
         }catch (error){
-            console.log(error.message);
+            console.error(error.message);
             return res.status(500).send("Server error");
         };
     } 
@@ -118,7 +131,7 @@ router.post('/login', [
                 res.json({token});
             });
         }catch (error){
-            console.log(error.message);
+            console.error(error.message);
             return res.status(500).send("Server error");
         };
     } 
