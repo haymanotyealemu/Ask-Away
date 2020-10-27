@@ -10,9 +10,10 @@ const gravatar = require('gravatar');
 const authentication = require('../middleware/authentication');
 
 // Here we start the get requests
+//Here we define to get a user by id by passing the middleware authentication 
 router.get('/', authentication, async (req, res) => {
     try {
-        let user = await (await User.findById(req.user.id)).isSelected('-password');
+        let user = await (await User.findById(req.user.id)).select('-password');
         res.json(user);
     } catch (error) {
         console.error(error.message);
@@ -20,7 +21,17 @@ router.get('/', authentication, async (req, res) => {
         
     }
 })
-
+// route to get all the users
+router.get('/allusers', async (req, res) => {
+    try {
+        let user = await (await User.find().select('-password'));
+        res.json(user);
+    } catch (error) {
+        console.error(error.message);
+        return res.status(500).send('Server error');
+        
+    }
+})
 // Here we start the user register request route
 router.post('/register', [
     check('firstName', 'First Name is empty').not().isEmpty(),
