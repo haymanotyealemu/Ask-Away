@@ -4,11 +4,11 @@ const app = express();
 const connectToDatabase = require("./config/connectToDatabase");
 
 const cors = require("cors");
-// //Here we call a function that connects express app to the our database
-connectToDatabase();
+ //Here we call a function that connects express app to the our database
+    connectToDatabase();
 // // we prevent from cors policy warning
 app.use(cors());
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 7000;
 
 // Allows us to use body json thing to create posts
 app.use(express.json({ extended: false }));
@@ -16,7 +16,7 @@ app.use(express.json({ extended: false }));
 app.use(express.json());
 // app.get('/', (req,res) => res.send("App is Started working" ));
 // Routes
-app.use("/api/users", require("./routes/users.js"));
+app.use("/api/users", require("./controllers/users.js"));
 // app.use("/api/posts", require("./controllers/posts.js"));
 // Serve up static assets (usually on heroku)
 // if (process.env.NODE_ENV === "production") {
