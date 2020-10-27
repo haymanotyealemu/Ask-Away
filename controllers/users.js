@@ -20,18 +20,20 @@ router.get('/', authentication, async (req, res) => {
         return res.status(500).send('Server error');
         
     }
-})
-// route to get all the users
-router.get('/allusers', async (req, res) => {
+});
+
+// route to get a user by Email
+router.get('/user_email/:email', async (req, res) => {
     try {
-        let user = await (await User.find().select('-password'));
+        let userEmail = req.params.email;
+        let user = await (await User.findOne({email: userEmail}).select('-password'));
         res.json(user);
     } catch (error) {
         console.error(error.message);
         return res.status(500).send('Server error');
         
     }
-})
+});
 // Here we start the user register request route
 router.post('/register', [
     check('firstName', 'First Name is empty').not().isEmpty(),
