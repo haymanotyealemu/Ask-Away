@@ -99,12 +99,13 @@ router.post('/login', [
             if(!user){
                 return res.status(404).send("User does not exist with this Email address!")
             }
-            let checkPasswordMatch = await bcrypt.compare(user.password, password);
+            // here we check the password from our database
+            let checkPasswordMatch = await bcrypt.compare(password, user.password);
             if(!checkPasswordMatch){
                 return res.status(401).json("Password You Entered do not match!");
             }
-            const salt = await bcrypt.genSalt(10);
-            let hashedPassword = await bcrypt.hash(password, salt);
+            // const salt = await bcrypt.genSalt(10);
+            // let hashedPassword = await bcrypt.hash(password, salt);
             // newUser.password = hashedPassword;
             // here we gonna create the jsonwebtoken
             const payload = {
@@ -112,7 +113,7 @@ router.post('/login', [
                     id: user._id,
                 }
             };
-            jwt.sign(payload, config.get('SECRET_KEY'), {expiresIn: 3600}, (err, token) => {
+            jwt.sign(payload, config.get('jsonWebTokenSecret'), {expiresIn: 3600}, (err, token) => {
                 if(err)throw err;
                 res.json({token});
             });
