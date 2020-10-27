@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const config = require('config');
-let User = require('../schemas/User');
+let User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const gravatar = require('gravatar');
 const jwt = require('jsonwebtoken');
@@ -110,6 +110,7 @@ router.post(
       newUser.password = hashedPassword;
 
       await newUser.save();
+      res.json('user registered');
 
       const payload = {
         user: {
