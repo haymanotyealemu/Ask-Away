@@ -26,7 +26,7 @@ router.get('/', authentication, async (req, res) => {
 router.get('/user_email/:email', async (req, res) => {
     try {
         let userEmail = req.params.email;
-        let user = await (await User.findOne({email: userEmail}).select('-password'));
+        let user =  await User.findOne({email: userEmail}).select('-password');
         res.json(user);
     } catch (error) {
         console.error(error.message);
@@ -38,7 +38,7 @@ router.get('/user_email/:email', async (req, res) => {
 router.get('/user_id/:id', async (req, res) => {
     try {
         let userId = req.params.id;
-        let user = await (await User.findById(userId).select('-password'));
+        let user =  await User.findById(userId).select('-password');
         res.json(user);
     } catch (error) {
         console.error(error.message);
@@ -46,8 +46,22 @@ router.get('/user_id/:id', async (req, res) => {
         
     }
 });
-// Here we start the user register request route
+
+// route to get all users
+router.get('/allusers', async (req, res) => {
+    try {
+        let users =  await User.find().select('-password');
+        res.json(users);
+    } catch (error) {
+        console.error(error.message);
+        return res.status(500).send('Server error');
+        
+    }
+});
+//****************************************************************************************************************************** */
+// Here we start the user register or signup request route
 router.post('/register', [
+    // here we check the inputs validation using express-validator
     check('firstName', 'First Name is empty').not().isEmpty(),
     check('lastName', 'Last name is empty').not().isEmpty(),
     check('userName', 'Username is empty').not().isEmpty(),
@@ -61,12 +75,22 @@ router.post('/register', [
         try {
             //object desturacturing
             let {firstName, lastName, userName, email,password} = req.body;
+            let user =  await User.findOne({ email }).select('-password');
+            let fetchedUserName  = await User.findOne({ userName}).select('-password');
             let errors = validationResult(req);
             if (!errors.isEmpty()){
                     return res.status(400).json({ errors: errors.array() });
                 };
-                //
-            // here we can access the user avatar from the users email account or the default one specification.
+            
+             // here we start checking if the user exist or not and when we take the email for checking we don't need to have the  password.
+            if(user){
+                return res.status(401).send("User has already existed"); 
+            };
+            // here we crosscheck the new registering users username with the existed username in our database
+            if(fetchedUserName === userName){
+                return res.status(401).send("User name is already has been taken");   
+            }
+            // here we can access the mew user avatar from the users email account or the default one specification
             const avatar = gravatar.url(email, {
                 r: "pg",
                 d: "mm",
@@ -80,35 +104,22 @@ router.post('/register', [
                 password,
                 avatar
             });
-            
+            // we hash the password
             const salt = await bcrypt.genSalt(10);
             let hashedPassword = await bcrypt.hash(password, salt);
             newUser.password = hashedPassword;
-            // here we save the new user that created to the database.
+            // here we save the new user who register successfully to the database.
             await newUser.save();
-            // res.send("user created");
-            // here we gonna create the jsonwebtoken
+            // here we gonna create the jsonwebtoken to our new user and store in the localstorage
             const payload = {
                 user : {
-                    id: user._id,
+                    id: newUser._id,
                 }
             };
             jwt.sign(payload, config.get('jsonWebTokenSecret'), {expiresIn: 3600}, (err, token) => {
                 if(err)throw err;
                 res.json({token});
-            })
-
-             // here we start checking if the user exist or not and when we take the email we don't need to have password.
-            let user = await (await User.findOne({ email })).select('-password');
-            if(user){
-                return res.status(401).send("User has already existed"); 
-            }
-            // // here we crosscheck the new registering users username with existed username in our database
-            let fetchedUserName  = await (await User.findOne({ userName})).select('-password');
-            if(fetchedUserName === userName){
-                return res.status(401).send("User name is already has been taken");   
-            }
-
+            });
         }catch (error){
             console.error(error.message);
             return res.status(500).send("Server error");
@@ -142,10 +153,6 @@ router.post('/login', [
             if(!checkPasswordMatch){
                 return res.status(401).json("Password You Entered do not match!");
             }
-            // const salt = await bcrypt.genSalt(10);
-            // let hashedPassword = await bcrypt.hash(password, salt);
-            // newUser.password = hashedPassword;
-            // here we gonna create the jsonwebtoken
             const payload = {
                 user : {
                     id: user._id,
@@ -179,6 +186,54 @@ router.put('/change_user_data/:user_data_to_change', authentication, [check('cha
         user[userDataToChange] = changeUserData.toString();
         await user.save();
         res.json('Data has been updated');
+    } catch (error) {
+        console.error(error.message);
+            return res.status(500).json("Server error");
+    }
+});
+//****************************************************************************** */
+// here we start to enable users to update their password.
+//First we make check the user request to change password with the actual password that belongs to that user from the database wather it matchs or not
+router.put("/check_actual_password", authentication, [check('passwordToCheck', 'Password has to be between 6 to 12 characters').isLength({
+    min: 6,
+    max: 12,
+})], async(req, res)=>{
+    try {
+        let { passwordToCheck } = req.body;
+        const errors = validationResult(req);
+        if (!errors.isEmpty()){
+                return res.status(400).json({ errors: errors.array() });
+            };
+        let user = await User.findById(req.user.id);
+        let passwordMatch = await bcrypt.compare( passwordToCheck, user.password);
+        if(!passwordMatch){
+            return res.status(401).json('Password does not match');
+        }
+        res.json('Success');
+    } catch (error) {
+        console.error(error.message);
+            return res.status(500).json("Server error");
+    }
+});
+// then we start to handle the user request to change the password.
+router.put("/change_password", authentication, [check('newPassword', 'New Password must be between 6 to 12 characters').isLength({
+    min: 6,
+    max: 12,
+})], async(req,res) => {
+    try {
+        let { newPassword } = req.body;
+        const errors = validationResult(req);
+        if (!errors.isEmpty()){
+                return res.status(400).json({ errors: errors.array() });
+            };
+        let user = await User.findById(req.user.id);
+        // we hash the password
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(newPassword, salt);
+        user.password = hashedPassword;
+        await user.save();
+        res.json("Congratulation You Change Your Password Successfully");
+
     } catch (error) {
         console.error(error.message);
             return res.status(500).json("Server error");
