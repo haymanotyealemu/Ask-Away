@@ -112,4 +112,57 @@ router.post(
   }
 );
 
+router.put(
+  '/search_for_post',
+  [check('searchValue', 'Search is empty').not().isEmpty()],
+
+  async (req, res) => {
+    const { searchValue } = req.body;
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty())
+      return res.status(404).json({ errors: errors.array() });
+    try {
+      let posts = await Post.find();
+      if (searchValue === '' || searchValue === null) {
+        res.status(401).json(posts);
+      } else {
+        let postsBySearch = posts.find(
+          (post) =>
+            post.postText.toString().toLowerCase().split(' ').join('') ===
+            searchValue.toString().toLowerCase().split(' ').join('')
+        );
+        res.json(postsBySearch);
+      }
+    } catch (error) {
+      console.error(error.message);
+      return res.status(500).send('Server error');
+    }
+  }
+);
+
+router.put('/likes/:post_id', authentication, async (req, res) => {
+  try {
+    let post = await Post.findById(req.params.post_id);
+
+    if (!post) return res.status(404).json('Post was not found!');
+
+    if (post.likes.find((like) => like.user.toString() === req.user.id))
+      return res.status(401).json('Post has already been liked!');
+
+    let newLike = {
+      user: req.user.id,
+    };
+
+    post.likes.unshift(newLike);
+
+    await post.save();
+
+    res.json(post);
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).send('Server error');
+  }
+});
+
 module.exports = router;

@@ -184,7 +184,7 @@ router.post(
 
 router.put(
   '/search',
-  [check('searchInput', 'Search is empty').not().isEmpty()],
+  [check('searchValue', 'Search is empty').not().isEmpty()],
 
   async (req, res) => {
     try {
