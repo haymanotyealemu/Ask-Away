@@ -13,7 +13,7 @@ const authentication = require('../middleware/authentication');
 //Here we define to get a user by id by passing the middleware authentication 
 router.get('/', authentication, async (req, res) => {
     try {
-        let user = await (await User.findById(req.user.id)).select('-password');
+        let user =  await User.findById(req.user.id).select('-password');
         res.json(user);
     } catch (error) {
         console.error(error.message);
@@ -27,6 +27,18 @@ router.get('/user_email/:email', async (req, res) => {
     try {
         let userEmail = req.params.email;
         let user = await (await User.findOne({email: userEmail}).select('-password'));
+        res.json(user);
+    } catch (error) {
+        console.error(error.message);
+        return res.status(500).send('Server error');
+        
+    }
+});
+// route to get a user by ID
+router.get('/user_id/:id', async (req, res) => {
+    try {
+        let userId = req.params.id;
+        let user = await (await User.findById(userId).select('-password'));
         res.json(user);
     } catch (error) {
         console.error(error.message);
@@ -78,7 +90,7 @@ router.post('/register', [
             // here we gonna create the jsonwebtoken
             const payload = {
                 user : {
-                    id: newUser._id,
+                    id: user._id,
                 }
             };
             jwt.sign(payload, config.get('jsonWebTokenSecret'), {expiresIn: 3600}, (err, token) => {
@@ -149,5 +161,27 @@ router.post('/login', [
         };
     } 
 );
-
+//********************************************************************** */
+// Here we define the route for changing the user data i.e the firstName, lastName and userName requested by the user
+router.put('/change_user_data/:user_data_to_change', authentication, [check('changeUserData', "Input is empty").not().isEmpty()], async(req, res) => {
+    try {
+        const { changeUserData } = req.body;
+        let user=  await User.findById(req.user.id).select('-password');
+        let errors = validationResult(req);
+        if (!errors.isEmpty()){
+                return res.status(400).json({ errors: errors.array() });
+            };
+        if(!user) return res.status(404).json('User not found');
+        let userDataToChange = req.params.user_data_to_change.toString();
+        if(user[userDataToChange] === changeUserData.toString()){
+            return res.status(401).json('This data already exists');
+        }
+        user[userDataToChange] = changeUserData.toString();
+        await user.save();
+        res.json('Data has been updated');
+    } catch (error) {
+        console.error(error.message);
+            return res.status(500).json("Server error");
+    }
+})
 module.exports = router;
