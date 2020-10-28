@@ -15,7 +15,7 @@ app.use(express.json({ extended: false }));
 // Sets up port
 let PORT = process.env.PORT || 8000;
 
-//app.use('/api/users', require('./routes/posts.js'));//
+app.use('/api/posts', require('./routes/posts.js'));
 app.use('/api/users', require('./routes/users.js'));
 
 // Syncing our database and logging a message to the user upon success

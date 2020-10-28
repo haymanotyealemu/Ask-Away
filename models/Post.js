@@ -5,18 +5,8 @@ let postSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
   },
-  firstName: {
-    type: String,
-    required: true,
-  },
-  lastName: {
-    type: String,
-    required: true,
-  },
   userName: {
     type: String,
-    required: true,
-    unique: true,
   },
   avatar: {
     type: String,
@@ -24,6 +14,10 @@ let postSchema = mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now(),
+  },
+  postText: {
+    type: String,
+    required: true,
   },
   likes: [
     {
@@ -39,7 +33,7 @@ let postSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user',
       },
-      firstName: {
+      userName: {
         type: String,
         required: true,
       },

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-let Post = require('../models/Posts');
+let Post = require('../models/Post');
 let User = require('../models/User');
 const authentication = require('../middleware/authentication');
 const { check, validationResult } = require('express-validator');
@@ -26,7 +26,7 @@ router.get('api/most_liked', async (req, res) => {
   }
 });
 
-router.get('api/most_recent', async (req, res) => {
+router.get('/most_recent', async (req, res) => {
   try {
     let posts = await Post.find().sort({ createdAt: 1 });
     res.json(posts);
@@ -36,7 +36,7 @@ router.get('api/most_recent', async (req, res) => {
   }
 });
 
-router.get('api/most_comments', async (req, res) => {
+router.get('/most_comments', async (req, res) => {
   try {
     let posts = await Post.find().sort({ comments: -1 });
     res.json(posts);
@@ -46,7 +46,7 @@ router.get('api/most_comments', async (req, res) => {
   }
 });
 
-router.get('api/:post_id', async (req, res) => {
+router.get('/:post_id', async (req, res) => {
   try {
     let posts = await Post.findById(req.params.post_id);
     res.json(posts);
@@ -56,7 +56,7 @@ router.get('api/:post_id', async (req, res) => {
   }
 });
 
-router.get('api/user_posts/:user_id', async (req, res) => {
+router.get('/user_posts/:user_id', async (req, res) => {
   try {
     let posts = await Post.findById({ user: req.params.user_id });
     res.json(posts);
@@ -66,7 +66,7 @@ router.get('api/user_posts/:user_id', async (req, res) => {
   }
 });
 
-router.get('api/user_posts', authentication, async (req, res) => {
+router.get('/user_posts', authentication, async (req, res) => {
   try {
     let posts = await Post.find();
     let userPosts = posts.filter(
@@ -89,6 +89,7 @@ router.post(
 
     if (!errors.isEmpty())
       return res.status(400).json({ errors: errors.array() });
+
     try {
       let user = await User.findById(req.user.id).select('-password');
 
@@ -96,7 +97,7 @@ router.post(
 
       let newPost = new Post({
         postText,
-        firstName: user.firstName,
+        userName: user.userName,
         avatar: user.avatar,
         user: req.user.id,
       });
