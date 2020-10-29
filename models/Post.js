@@ -6,24 +6,19 @@ const PostSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "user",
     },
-    firstName: {
-        type: String,
-        required: true
-    },
-    lastName: {
-        type:String
-    },
+    
     avatar: {
         type: String
     },
     userName: {
-        type: String
+        type: String,
+        required: true
     },
     date: { 
         type: Date,
         default: Date.now()
     },
-    contentOfPost: {
+    postText: {
         type: String,
         required: true
     },
@@ -33,7 +28,7 @@ const PostSchema = new Schema({
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "user"
             },
-            },
+        },
     ],
     comments: [
         {
@@ -41,12 +36,12 @@ const PostSchema = new Schema({
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "user"
             },
-            firstName:{
+            userName:{
                 type: String,
                 required: true
             },
-            contentOfPost: {
-                type: String
+            commentText: {
+                type: String,
             },
             avatar: {
                 type: String

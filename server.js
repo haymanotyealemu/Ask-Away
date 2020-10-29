@@ -14,7 +14,6 @@ const PORT = process.env.PORT || 7000;
 app.use(express.json({ extended: false }));
 
 app.use(express.json());
-// app.get('/', (req,res) => res.send("App is Started working" ));
 // Routes
 app.use("/api/users", require("./controllers/users.js"));
 app.use("/api/posts", require("./controllers/posts.js"));
