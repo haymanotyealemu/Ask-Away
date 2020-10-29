@@ -55,7 +55,7 @@ router.get('/:post_id', async (req, res) => {
     return res.status(500).json('Server error');
   }
 });
-// 
+// get users posts by id
 router.get('/user_posts/:user_id', async (req, res) => {
   try {
     let posts = await Post.find({ user: req.params.user_id });
@@ -65,7 +65,7 @@ router.get('/user_posts/:user_id', async (req, res) => {
     return res.status(500).json('Server error');
   }
 });
-//
+// get user posts by middleware
 router.get('/user_posts', authentication, async (req, res) => {
   try {
     let posts = await Post.find();
@@ -80,6 +80,8 @@ router.get('/user_posts', authentication, async (req, res) => {
 });
 //*************************************************************************************** */
 //  here we start the post request
+
+// Create a post request
 router.post(
   '/',
   authentication,
@@ -110,6 +112,7 @@ router.post(
 );
 //*************************************************************************************** */
 // Here we start the put requests
+// search for post route
 router.put(
   '/search_for_post',
   [check('searchValue', 'Search is empty').not().isEmpty()],
@@ -213,7 +216,10 @@ router.put("/like_comment/:post_id/:comment_id", authentication, async(req, res)
     return res.status(500).json('Server error');
   }
 });
-//here we define the route that delete posts
+//************************************************************************* */
+// Here we start the delete route
+
+//here we define the route that remove posts
 router.delete("/delete_post/:post_id", authentication, async( req, res) => {
   try {
     let post = await Post.findById(req.params.post_id);

@@ -10,7 +10,7 @@ const gravatar = require('gravatar');
 const authentication = require('../middleware/authentication');
 
 // Here we start the get requests
-//Here we define to get a user by id by passing the middleware authentication 
+//Here we define to find a user by id by passing the middleware authentication 
 router.get('/', authentication, async (req, res) => {
     try {
         let user =  await User.findById(req.user.id).select('-password');
@@ -59,6 +59,8 @@ router.get('/allusers', async (req, res) => {
     }
 });
 //****************************************************************************************************************************** */
+// We start the post route
+
 // Here we start the user register or signup request route
 router.post('/register', [
     // here we check the inputs validation using express-validator
@@ -73,7 +75,7 @@ router.post('/register', [
     ],
     async (req, res) => {
         try {
-            //object desturacturing
+            
             let {firstName, lastName, userName, email,password} = req.body;
             let user =  await User.findOne({ email }).select('-password');
             let fetchedUserName  = await User.findOne({ userName}).select('-password');
@@ -126,7 +128,7 @@ router.post('/register', [
         };
     } 
 );
-/********************************************************************************************************/
+
 // Here we start the user login route
 router.post('/login', [
     check('email', 'Email is empty').isEmail(),
@@ -169,6 +171,7 @@ router.post('/login', [
     } 
 );
 //********************************************************************** */
+// We start the put routes
 // Here we define the route for changing the user data i.e the firstName, lastName and userName requested by the user
 router.put('/change_user_data/:user_data_to_change', authentication, [check('changeUserData', "Input is empty").not().isEmpty()], async(req, res) => {
     try {
@@ -193,7 +196,7 @@ router.put('/change_user_data/:user_data_to_change', authentication, [check('cha
 });
 //****************************************************************************** */
 // here we start to enable users to update their password.
-//First we make check the user request to change password with the actual password that belongs to that user from the database wather it matchs or not
+//First we make check the user request to change password with the actual password that belongs to that user from the database whether it matchs or not(check Actual Password)
 router.put("/check_actual_password", authentication, [check('passwordToCheck', 'Password has to be between 6 to 12 characters').isLength({
     min: 6,
     max: 12,
@@ -215,7 +218,7 @@ router.put("/check_actual_password", authentication, [check('passwordToCheck', '
             return res.status(500).json("Server error");
     }
 });
-// then we start to handle the user request to change the password.
+// then we start to handle the user request to change the password.(Change the user Password).
 router.put("/change_password", authentication, [check('newPassword', 'New Password must be between 6 to 12 characters').isLength({
     min: 6,
     max: 12,
@@ -238,5 +241,25 @@ router.put("/change_password", authentication, [check('newPassword', 'New Passwo
         console.error(error.message);
             return res.status(500).json("Server error");
     }
-})
+});
+
+// search the user by user name
+router.put("/search_by_username", [check('userNameFromSearch', 'Search is empty').not().isEmpty()], async (req, res) => {
+    try {
+        let { userNameFromSearch } = req.body;
+        let errors = validationResult(req);
+        if (!errors.isEmpty()){
+            return res.status(400).json({ errors: errors.array() });
+        };
+        let users = await User.find().select('-password');
+        let findUserByUserName = users.filter((user) => user.userName.toString().toLowerCase().split(" ").join("") === userNameFromSearch.toString().toLowerCase().split(" ").join(""));
+        res.json(findUserByUserName);
+    
+    } catch (error) {
+    console.error(error.message);
+        return res.status(500).json("Server error");
+    
+    }
+});
+
 module.exports = router;
