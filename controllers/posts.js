@@ -95,7 +95,7 @@ router.post(
       if (!user) return res.status(404).json('User not found');
       let newPost = new Post({
         postText,
-        userName: user.userName,
+        firstName: user.firstName,
         avatar: user.avatar,
         user: req.user.id,
       });
@@ -181,7 +181,7 @@ router.put("/add_comment/:post_id", authentication, [check('commentText', 'Comme
 
       let newComment = {
         commentText,
-        userName: user.userName,
+        firstName: user.firstName,
         avatar: user.avatar
       }
       post.comments.unshift(newComment);
@@ -213,4 +213,63 @@ router.put("/like_comment/:post_id/:comment_id", authentication, async(req, res)
     return res.status(500).json('Server error');
   }
 });
+//here we define the route that delete posts
+router.delete("/delete_post/:post_id", authentication, async( req, res) => {
+  try {
+    let post = await Post.findById(req.params.post_id);
+    if(!post) return res.status(404).json('post not found');
+    if(post.user.toString() !== req.user.id.toString());{
+      return res.status(401).json('You are not allowed to do that!');
+    }
+    await post.remove();
+    res.json('post has been deleted');
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json('Server error');
+  }
+});
+//here we define the route that handle removing likes from the posts
+router.delete("/remove_like/:post_id/:like_id", authentication, async (req, res) => {
+  try {
+    let post = await Post.findById(req.params.post_id);
+    if(!post) return res.statusO(404).json('Post not found!');
+    const removeLikeFromPost = post.likes.filter(like => like.id.toString() !== req.params.like_id.toString());
+    post.likes = removeLikeFromPost;
+    await post.save();
+    res.json(post);
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json('Server error');
+  }
+})
+// here we define the route that handle removing comments from the post
+router.delete("/remove_comment/:post_id/:comment_id"), authentication, async(req, res)=>{
+  try {
+    let post = await Post.findById(req.params.post_id);
+    if(!post) return res.status(404).json("Post not found");
+    const removeCommentsFromComments = post.comments.filter((comment) => comment._id.toString() !== req.params.comment_id);
+    post.comments = removeCommentsFromComments;
+    await post.save();
+    res.json(post);
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json('Server error');
+  }
+}
+// here we define the route that handle removing likes from the comments
+router.delete("/remove_like_comment/:post_id/:comment_id/:like_id", authentication, async (req, res) => {
+  try {
+    let post = await Post.findById(req.params.post_id);
+    if(!post) return res.statusO(404).json('Post not found!');
+    const comment = post.comments.find((comment) => comment._id.toString() === req.params.comment_id.toString());
+
+    const removeLikeFromComment = comment.likes.filter((like) => like._id.toString() !== req.params.like_id.toString());
+    comment.likes = removeLikeFromComment;
+    await post.save();
+    res.json(post);
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json('Server error');
+  }
+})
 module.exports = router;

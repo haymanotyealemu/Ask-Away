@@ -6,13 +6,19 @@ const PostSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "user",
     },
-    
+    firstName: {
+        type: String,
+        required: true
+    },
+    lasttName: {
+        type: String,
+        
+    },
     avatar: {
         type: String
     },
     userName: {
         type: String,
-        required: true
     },
     date: { 
         type: Date,
@@ -36,7 +42,7 @@ const PostSchema = new Schema({
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "user"
             },
-            userName:{
+            firstName:{
                 type: String,
                 required: true
             },
@@ -59,7 +65,7 @@ const PostSchema = new Schema({
                 },
             ],
         },
-    ]
+    ],
 });
 
 module.exports = Post = mongoose.model('post', PostSchema);
