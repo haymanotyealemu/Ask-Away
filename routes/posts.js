@@ -165,6 +165,69 @@ router.put('/likes/:post_id', authentication, async (req, res) => {
   }
 });
 
+router.put(
+  '/add_comment/:post_id',
+  authentication,
+  [check('commentText', 'Comment is empty').not().isEmpty()],
+  async (req, res) => {
+    const { commentText } = req.body;
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty())
+      return res.status(400).json({ errors: errors.array() });
+    try {
+      let post = await Post.findById(req.params.post_id);
+      let user = await User.findById(req.user.id);
+      if (!user) {
+        return res.status(404).json('User not found');
+      }
+      if (!post) {
+        return res.status(404).json('Post not found');
+      }
+
+      let newComment = {
+        commentText,
+        userName: user.userName,
+        avatar: user.avatar,
+      };
+      post.comments.unshift(newComment);
+      await post.save();
+      res.json('Comment is added');
+    } catch (error) {
+      console.error(error.message);
+      return res.status(500).json('Server error');
+    }
+  }
+);
+
+// route for liking our comments
+router.put(
+  '/like_comment/:post_id/:comment_id',
+  authentication,
+  async (req, res) => {
+    try {
+      let post = await Post.findById(req.params.post_id);
+      if (!post) {
+        return res.status(401).json('post not found');
+      }
+      const commentFromPost = post.comments.find(
+        (comment) => comment.id.toString() === req.params.comment_id.toString()
+      );
+      if (!commentFromPost) return res.status(404).json('Comment not found');
+      let newLike = {
+        user: req.user.id,
+      };
+      commentFromPost.likes.unshift(newLike);
+
+      await post.save();
+      res.json('Comment liked');
+    } catch (error) {
+      console.error(error.message);
+      return res.status(500).json('Server error');
+    }
+  }
+);
+
 router.delete('/delete_post/:post_id', authentication, async (req, res) => {
   try {
     let post = await Post.findById(req.params.post_id);
@@ -197,6 +260,60 @@ router.delete(
       );
 
       post.likes = removeLike;
+
+      await post.save();
+
+      res.json(post);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).send('Server Error');
+    }
+  }
+);
+
+router.delete(
+  '/remove_comment/:post_id/:comment_id',
+  authentication,
+  async (req, res) => {
+    try {
+      let post = await Post.findById(req.params.post_id);
+
+      if (!post) return res.status(404).json('Post not found');
+
+      const removeComment = post.comments.filter(
+        (comment) => comment.id.toString() !== req.params.comment_id.toString()
+      );
+
+      post.comments = removeComment;
+
+      await post.save();
+
+      res.json(post);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).send('Server Error');
+    }
+  }
+);
+
+router.delete(
+  '/remove_like_from_comment/:post_id/:comment_id/:like_id',
+  authentication,
+  async (req, res) => {
+    try {
+      let post = await Post.findById(req.params.post_id);
+
+      if (!post) return res.status(404).json('Post not found');
+
+      const comment = post.comments.find(
+        (comment) => comment_id.toString() === req.params.comment_id.toString()
+      );
+
+      const removeLike = comment.likes.filter(
+        (like) => like.id.toString() !== req.params.like_id.toString()
+      );
+
+      comment.likes = removeLike;
 
       await post.save();
 
