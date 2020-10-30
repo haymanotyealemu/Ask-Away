@@ -17,7 +17,7 @@ const RegisterPage = ({ registerUser, error }) => {
   const { firstName, lastName, userName, email, password } = userData;
 
   const onChange = (e) =>
-    setUserData({ ...userData, [e.target.firstName]: e.target.value });
+    setUserData({ ...userData, [e.target.name]: e.target.value });
 
   return (
     <main className="register-page-wrapper">

@@ -1,5 +1,5 @@
 import React from "react";
-import successity from "../successity.png";
+import askaway from "../askaway.png";
 import { Link } from "react-router-dom";
 
 const LandingPage = () => {
@@ -8,7 +8,7 @@ const LandingPage = () => {
       <div className="text-wrapper">
         <div className="text-header-wrapper">
           <p className="text-header font__p p__size">Welcome in</p>
-          <span>Successity! </span>
+          <span>Ask Away! </span>
         </div>
 
         <div className="text-section font__p p__size">
@@ -27,7 +27,7 @@ const LandingPage = () => {
         </div>
       </div>
       <div className="image-wrapper">
-        <img src={successity} className="landing-image" alt="" />
+        <img src={ askaway } className="landing-image" alt="" />
       </div>
     </div>
   );

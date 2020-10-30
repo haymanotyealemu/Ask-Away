@@ -1,12 +1,12 @@
 import React from "react";
-import successity from "../successity.png";
+import askaway from "../askaway.png";
 import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   return (
     <div className="dashboard-wrapper">
       <div className="image-wrapper">
-        <img src={successity} alt="" className="dashboard-image" />
+        <img src={askaway} alt="" className="dashboard-image" />
       </div>
 
       <div className="dashboard-links-wrapper">

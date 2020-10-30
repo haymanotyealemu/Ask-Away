@@ -6,7 +6,7 @@ import AccountPageSection from "../components/AccountPage/AccountPageSection";
 
 const Account = ({
   getUserPosts,
-  auth: { name, lastName, userName, avatar, email },
+  auth: { firstName, lastName, userName, avatar, email },
   users: { profilePosts },
 }) => {
   useEffect(() => {
@@ -18,7 +18,7 @@ const Account = ({
         <img src={avatar} alt="" />
 
         <AccountPageSection
-          name={name}
+          name={firstName}
           lastName={lastName}
           email={email}
           userName={userName}
