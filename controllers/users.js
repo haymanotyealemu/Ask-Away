@@ -35,7 +35,7 @@ router.get('/user_email/:email', async (req, res) => {
     }
 });
 // route to get a user by ID
-router.get('/user_id/:id', async (req, res) => {
+router.get('/user_by_id/:user_id', async (req, res) => {
     try {
         let userId = req.params.id;
         let user =  await User.findById(userId).select('-password');
