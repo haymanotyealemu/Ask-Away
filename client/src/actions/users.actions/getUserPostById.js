@@ -1,10 +1,10 @@
 import axios from "axios";
-import { GET_USER_POSTS, USER_ERROR} from "../../constants/users.contants";
+import { GET_POST_BY_USER_ID, USER_ERROR} from "../../constants/users.contants";
 
-export const getUserPosts = () => async (dispatch) => {
+export const getUserPostsById= (user_id) => async (dispatch) => {
     try {
-        const res = await axios.get(`http://localhost:7000/api/posts/user_posts`);
-        dispatch({ type: GET_USER_POSTS, payload: res.data});
+        const res = await axios.get(`http://localhost:7000/api/posts/user_posts/${user_id}`);
+        dispatch({ type: GET_POST_BY_USER_ID, payload: res.data});
     } catch (error) {
         dispatch({
             type: USER_ERROR,
