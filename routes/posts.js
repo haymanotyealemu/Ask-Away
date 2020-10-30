@@ -5,324 +5,81 @@ let User = require('../models/User');
 const authentication = require('../middleware/authentication');
 const { check, validationResult } = require('express-validator');
 
-router.get('/', async (req, res) => {
-  try {
-    let posts = await Post.find();
-    res.json(posts);
-  } catch (error) {
-    console.error(error.message);
-    return res.status(500).send('Server error');
-  }
-});
+const {
+  createPostValidator,
+  searchPostValidator,
+  addCommentValidator,
+} = require('../middleware/express-validator/expressValidator');
+const getPosts = require('../functions/postFunctions/getPosts');
+const getMostLikedPosts = require('../functions/postFunctions/getMostLikedPosts');
+const getMostRecentPosts = require('../functions/postFunctions/getMostRecentPosts');
+const getMostCommentedPost = require('../functions/postFunctions/getMostCommentedPost');
+const getPostById = require('../functions/postFunctions/getPostById');
+const getUsersPostsById = require('../functions/postFunctions/getUsersPostsById');
+const getUserPosts = require('../functions/postFunctions/getUserPosts');
+const createPost = require('../functions/postFunctions/createPost');
+const searchForPost = require('../functions/postFunctions/searchForPost');
+const addLike = require('../functions/postFunctions/addLike');
+const addComment = require('../functions/postFunctions/addComment');
+const likeComment = require('../functions/postFunctions/likeComment');
 
-router.get('api/most_liked', async (req, res) => {
-  try {
-    // orders from most liked comment to least liked
-    let posts = await Post.find().sort({ likes: -1 });
-    res.json(posts);
-  } catch (error) {
-    console.error(error.message);
-    return res.status(500).send('Server error');
-  }
-});
+const removeLikeFromPost = require('../functions/postFunctions/removeLikeFromPost');
+const removeComment = require('../functions/postFunctions/removeComment');
+const deletePost = require('../functions/postFunctions/deletePost');
+const removeLikeFromComment = require('../functions/postFunctions/removeLikeFromComment');
 
-router.get('/most_recent', async (req, res) => {
-  try {
-    let posts = await Post.find().sort({ createdAt: 1 });
-    res.json(posts);
-  } catch (error) {
-    console.error(error.message);
-    return res.status(500).send('Server error');
-  }
-});
+router.get('/', getPosts);
 
-router.get('/most_comments', async (req, res) => {
-  try {
-    let posts = await Post.find().sort({ comments: -1 });
-    res.json(posts);
-  } catch (error) {
-    console.error(error.message);
-    return res.status(500).send('Server error');
-  }
-});
+router.get('/most_liked', getMostLikedPosts);
 
-router.get('/:post_id', async (req, res) => {
-  try {
-    let posts = await Post.findById(req.params.post_id);
-    res.json(posts);
-  } catch (error) {
-    console.error(error.message);
-    return res.status(500).send('Server error');
-  }
-});
+router.get('/most_recent', getMostRecentPosts);
 
-router.get('/user_posts/:user_id', async (req, res) => {
-  try {
-    let posts = await Post.findById({ user: req.params.user_id });
-    res.json(posts);
-  } catch (error) {
-    console.error(error.message);
-    return res.status(500).send('Server error');
-  }
-});
+router.get('/most_comments', getMostCommentedPost);
 
-router.get('/user_posts', authentication, async (req, res) => {
-  try {
-    let posts = await Post.find();
-    let userPosts = posts.filter(
-      (post) => post.user.toString() === req.user.id.toString()
-    );
-    res.json(userPosts);
-  } catch (error) {
-    console.error(error.message);
-    return res.status(500).send('Server error');
-  }
-});
+router.get('/:post_id', getPostById);
 
-router.post(
-  '/',
-  authentication,
-  [check('postText', 'Text is required!').not().isEmpty()],
-  async (req, res) => {
-    let { postText } = req.body;
-    let errors = validationResult(req);
+router.get('/user_posts/:user_id', getUsersPostsById);
 
-    if (!errors.isEmpty())
-      return res.status(400).json({ errors: errors.array() });
+router.get('/user_posts', authentication, getUserPosts);
 
-    try {
-      let user = await User.findById(req.user.id).select('-password');
+router.post('/', authentication, createPostValidator, createPost);
 
-      if (!user) return res.status(404).json('User not found');
+router.put('/search_for_post', searchPostValidator, searchForPost);
 
-      let newPost = new Post({
-        postText,
-        userName: user.userName,
-        avatar: user.avatar,
-        user: req.user.id,
-      });
-
-      await newPost.save();
-
-      res.json('Post created');
-    } catch (error) {
-      console.error(error.message);
-      return res.status(500).send('Server error');
-    }
-  }
-);
-
-router.put(
-  '/search_for_post',
-  [check('searchValue', 'Search is empty').not().isEmpty()],
-
-  async (req, res) => {
-    const { searchValue } = req.body;
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty())
-      return res.status(404).json({ errors: errors.array() });
-    try {
-      let posts = await Post.find();
-      if (searchValue === '' || searchValue === null) {
-        res.status(401).json(posts);
-      } else {
-        let postsBySearch = posts.find(
-          (post) =>
-            post.postText.toString().toLowerCase().split(' ').join('') ===
-            searchValue.toString().toLowerCase().split(' ').join('')
-        );
-        res.json(postsBySearch);
-      }
-    } catch (error) {
-      console.error(error.message);
-      return res.status(500).send('Server error');
-    }
-  }
-);
-
-router.put('/likes/:post_id', authentication, async (req, res) => {
-  try {
-    let post = await Post.findById(req.params.post_id);
-
-    if (!post) return res.status(404).json('Post was not found!');
-
-    if (post.likes.find((like) => like.user.toString() === req.user.id))
-      return res.status(401).json('Post has already been liked!');
-
-    let newLike = {
-      user: req.user.id,
-    };
-
-    post.likes.unshift(newLike);
-
-    await post.save();
-
-    res.json(post);
-  } catch (error) {
-    console.error(error.message);
-    return res.status(500).send('Server error');
-  }
-});
+router.put('/likes/:post_id', authentication, addLike);
 
 router.put(
   '/add_comment/:post_id',
   authentication,
-  [check('commentText', 'Comment is empty').not().isEmpty()],
-  async (req, res) => {
-    const { commentText } = req.body;
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty())
-      return res.status(400).json({ errors: errors.array() });
-    try {
-      let post = await Post.findById(req.params.post_id);
-      let user = await User.findById(req.user.id);
-      if (!user) {
-        return res.status(404).json('User not found');
-      }
-      if (!post) {
-        return res.status(404).json('Post not found');
-      }
-
-      let newComment = {
-        commentText,
-        userName: user.userName,
-        avatar: user.avatar,
-      };
-      post.comments.unshift(newComment);
-      await post.save();
-      res.json('Comment is added');
-    } catch (error) {
-      console.error(error.message);
-      return res.status(500).json('Server error');
-    }
-  }
+  addCommentValidator,
+  addComment
 );
 
 // route for liking our comments
-router.put(
-  '/like_comment/:post_id/:comment_id',
-  authentication,
-  async (req, res) => {
-    try {
-      let post = await Post.findById(req.params.post_id);
-      if (!post) {
-        return res.status(401).json('post not found');
-      }
-      const commentFromPost = post.comments.find(
-        (comment) => comment.id.toString() === req.params.comment_id.toString()
-      );
-      if (!commentFromPost) return res.status(404).json('Comment not found');
-      let newLike = {
-        user: req.user.id,
-      };
-      commentFromPost.likes.unshift(newLike);
+router.put('/like_comment/:post_id/:comment_id', authentication, likeComment);
 
-      await post.save();
-      res.json('Comment liked');
-    } catch (error) {
-      console.error(error.message);
-      return res.status(500).json('Server error');
-    }
-  }
-);
+// route to delete post
+router.delete('/delete_post/:post_id', authentication, deletePost);
 
-router.delete('/delete_post/:post_id', authentication, async (req, res) => {
-  try {
-    let post = await Post.findById(req.params.post_id);
-
-    if (!post) return res.status(404).json('Post not found');
-
-    if (post.user.toString() !== req.user.id.toString())
-      return res.status(401).json('You are not allowed to do that! ');
-
-    await post.remove();
-
-    res.json('Post has been deleted!');
-  } catch (error) {
-    console.error(error);
-    return res.status(500).send('Server Error');
-  }
-});
-
+// route to remove like from a post
 router.delete(
   '/remove_like_from_post/:post_id/:like_id',
   authentication,
-  async (req, res) => {
-    try {
-      let post = await Post.findById(req.params.post_id);
-
-      if (!post) return res.status(404).json('Post not found');
-
-      const removeLike = post.likes.filter(
-        (like) => like.id.toString() !== req.params.like_id.toString()
-      );
-
-      post.likes = removeLike;
-
-      await post.save();
-
-      res.json(post);
-    } catch (error) {
-      console.error(error);
-      return res.status(500).send('Server Error');
-    }
-  }
+  removeLikeFromPost
 );
 
+// route to delete a comment
 router.delete(
   '/remove_comment/:post_id/:comment_id',
   authentication,
-  async (req, res) => {
-    try {
-      let post = await Post.findById(req.params.post_id);
-
-      if (!post) return res.status(404).json('Post not found');
-
-      const removeComment = post.comments.filter(
-        (comment) => comment.id.toString() !== req.params.comment_id.toString()
-      );
-
-      post.comments = removeComment;
-
-      await post.save();
-
-      res.json(post);
-    } catch (error) {
-      console.error(error);
-      return res.status(500).send('Server Error');
-    }
-  }
+  removeComment
 );
 
+// route to remove like from comment
 router.delete(
   '/remove_like_from_comment/:post_id/:comment_id/:like_id',
   authentication,
-  async (req, res) => {
-    try {
-      let post = await Post.findById(req.params.post_id);
-
-      if (!post) return res.status(404).json('Post not found');
-
-      const comment = post.comments.find(
-        (comment) => comment_id.toString() === req.params.comment_id.toString()
-      );
-
-      const removeLike = comment.likes.filter(
-        (like) => like.id.toString() !== req.params.like_id.toString()
-      );
-
-      comment.likes = removeLike;
-
-      await post.save();
-
-      res.json(post);
-    } catch (error) {
-      console.error(error);
-      return res.status(500).send('Server Error');
-    }
-  }
+  removeLikeFromComment
 );
 
 module.exports = router;
