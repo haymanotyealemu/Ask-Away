@@ -1,17 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const { check, validationResult } = require('express-validator');
-const config = require('config');
-let User = require('../models/User');
-const bcrypt = require('bcryptjs');
-const gravatar = require('gravatar');
-const jwt = require('jsonwebtoken');
+
 const authentication = require('../middleware/authentication');
 const getUserByMiddleware = require('../functions/userFunctions/getUserByMiddleware');
 const getUserByEmail = require('../functions/userFunctions/getUserByEmail');
 const getUsers = require('../functions/userFunctions/getUsers');
 const getUsersById = require('../functions/userFunctions/getUserById');
 const registerUser = require('../functions/userFunctions/registerUser');
+
 const {
   registerValidator,
   loginValidator,

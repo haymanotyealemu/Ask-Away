@@ -1,15 +1,13 @@
 const express = require('express');
 const router = express.Router();
-let Post = require('../models/Post');
-let User = require('../models/User');
 const authentication = require('../middleware/authentication');
-const { check, validationResult } = require('express-validator');
 
 const {
   createPostValidator,
   searchPostValidator,
   addCommentValidator,
 } = require('../middleware/express-validator/expressValidator');
+
 const getPosts = require('../functions/postFunctions/getPosts');
 const getMostLikedPosts = require('../functions/postFunctions/getMostLikedPosts');
 const getMostRecentPosts = require('../functions/postFunctions/getMostRecentPosts');
