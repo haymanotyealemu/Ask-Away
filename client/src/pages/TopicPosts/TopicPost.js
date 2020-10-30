@@ -23,11 +23,11 @@ const TopicPost = ({
 
       <div className="topic-user">
         <img src={post.avatar} className="topic-avatar" alt="" />
-        <p className="font__p p__size">{post.name}</p>
+        <p className="font__p p__size">{post.firstName}</p>
       </div>
 
       <div className="topic-section">
-        <p>{post.textOfThePost}</p>
+        <p>{post.postText}</p>
         <div className="topic-section-links">
           <div className="like-section" style={{ color: "rgb(42, 9, 9)" }}>
             <div

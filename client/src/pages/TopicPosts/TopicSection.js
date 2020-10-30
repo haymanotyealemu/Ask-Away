@@ -19,7 +19,7 @@ const TopicSection = ({
       </div>
 
       <div className="topic-section">
-        <p>{post.textOfThePost}</p>
+        <p>{post.postText}</p>
         <div className="topic-section-links">
           <div className="like-item">
             <p

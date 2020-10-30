@@ -1,14 +1,14 @@
 import { SEARCH_TOPICS, POST_ERROR } from "../../constants/posts.constants";
 import axios from "axios";
 
-export const searchTopics = (searchInput) => async (dispatch) => {
+export const searchTopics = (searchValue) => async (dispatch) => {
   try {
     const config = {
       headers: {
         "Content-Type": "application/json",
       },
     };
-    const body = JSON.stringify({ searchInput });
+    const body = JSON.stringify({ searchValue });
     const res = await axios.put(
       `http://localhost:7000/api/posts/search_for_post`,
       body,

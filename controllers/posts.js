@@ -55,7 +55,7 @@ router.get('/:post_id', async (req, res) => {
     return res.status(500).json('Server error');
   }
 });
-// get users posts by id
+// get user post by id
 router.get('/user_posts/:user_id', async (req, res) => {
   try {
     let posts = await Post.find({ user: req.params.user_id });
@@ -128,7 +128,7 @@ router.put(
       if (searchValue === '' || searchValue === null) {
         res.status(401).json(posts);
       } else {
-        let postsBySearch = posts.find(
+        const postsBySearch = posts.filter(
           (post) =>
             post.postText.toString().toLowerCase().split(' ').join('') ===
             searchValue.toString().toLowerCase().split(' ').join('')

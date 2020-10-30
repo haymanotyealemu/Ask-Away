@@ -10,7 +10,7 @@ const PostSchema = new Schema({
         type: String,
         required: true
     },
-    lasttName: {
+    lastName: {
         type: String,
         
     },

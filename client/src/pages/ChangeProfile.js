@@ -29,8 +29,8 @@ const ChangeProfile = ({ changeUserData, posts: { errors } }) => {
             <p className="font__bold p__size font__p">Change Username</p>
           </div>
 
-          <div className="input-wrapper" onClick={() => onChange("name")}>
-            <p className="font__bold p__size font__p">Change name</p>
+          <div className="input-wrapper" onClick={() => onChange("firstName")}>
+            <p className="font__bold p__size font__p">Change first name</p>
           </div>
 
           <div className="input-wrapper" onClick={() => onChange("lastName")}>

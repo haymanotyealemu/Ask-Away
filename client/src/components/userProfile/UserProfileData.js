@@ -5,9 +5,9 @@ const UserProfileData = ({ userProfile }) => {
     <div className="data-items">
       <div className="font__p data-item">
         <p style={{ marginRight: ".4em" }} className="font__bold">
-          Name:
+          first Name:
         </p>
-        {userProfile.name}
+        {userProfile.first_name}
       </div>
 
       <div className="font__p data-item">
