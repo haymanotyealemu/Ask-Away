@@ -1,5 +1,5 @@
 import React from "react";
-import askaway from "../askaway.png";
+import askaway from "../askaway.jpg";
 import { Link } from "react-router-dom";
 
 const LandingPage = () => {

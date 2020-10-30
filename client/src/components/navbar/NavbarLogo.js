@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import askaway from "../../askaway.png";
+import askaway from "../../askaway.jpg";
 
 const NavbarLogo = () => {
   return (
