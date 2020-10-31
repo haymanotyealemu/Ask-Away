@@ -3,7 +3,7 @@ import {
     USER_ERROR,
     GET_USER_POSTS,
     GET_POST_BY_USER_ID,
-  } from "../constants/users.constants";
+  } from "../constants/users.contants";
   
   const initialState = {
     userProfile: null,
