@@ -15,8 +15,8 @@ app.use(express.json({ extended: false }));
 
 app.use(express.json());
 // Routes
-app.use("/api/users", require("./controllers/users.js"));
-app.use("/api/posts", require("./controllers/posts.js"));
+app.use("/api/users", require("./routes/users.js"));
+app.use("/api/posts", require("./routes/posts.js"));
 // Serve up static assets (usually on heroku)
 // if (process.env.NODE_ENV === "production") {
 //     app.use(express.static("client/build"));
