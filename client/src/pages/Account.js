@@ -18,7 +18,7 @@ const Account = ({
         <img src={avatar} alt="" />
 
         <AccountPageSection
-          name={firstName}
+          firstname={firstName}
           lastName={lastName}
           email={email}
           userName={userName}

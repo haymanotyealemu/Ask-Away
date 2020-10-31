@@ -17,7 +17,7 @@ const UserPost = ({ post, removePost, auth }) => {
       </div>
 
       <div className="user-post-topic">
-        <p className="font__p font__bold">{post.textOfThePost}</p>
+        <p className="font__p font__bold">{post.postText}</p>
       </div>
 
       <div className="post__likes__comments__deleteBtn-wrapper">

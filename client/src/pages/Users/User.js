@@ -12,7 +12,7 @@ const User = ({ user }) => {
       <div className="topic-section">
         <div className="topic-section-links">
           <div className="link-to-post-page-button app_color_background font__p font__bold p__size">
-            <Link to={`/users/user/${user._id}`}>View Profile</Link>
+            <Link to={`users/user/${user._id}`}>View Profile</Link>
           </div>
         </div>
       </div>

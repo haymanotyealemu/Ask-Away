@@ -1,5 +1,5 @@
 const Post = require('../../models/Post');
-
+// get user posts by middleware
 module.exports = async (req, res) => {
   try {
     let posts = await Post.find();
