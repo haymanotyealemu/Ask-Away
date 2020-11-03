@@ -8,7 +8,7 @@ const cors = require("cors");
     connectToDatabase();
 // // we prevent from cors policy warning
 app.use(cors());
-const PORT = process.env.PORT || 7000;
+const PORT = process.env.PORT || 8000;
 
 // Allows us to use body json thing to create posts
 app.use(express.json({ extended: false }));

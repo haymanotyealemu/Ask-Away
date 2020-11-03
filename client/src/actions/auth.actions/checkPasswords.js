@@ -13,7 +13,7 @@ import {
       };
       const body = JSON.stringify({ passwordToCheck });
       const res = await axios.put(
-        "http://localhost:7000/api/users/check_acutal_password",
+        "http://localhost:8000/api/users/check_acutal_password",
         body,
         config
       );

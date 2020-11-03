@@ -10,7 +10,7 @@ export const searchTopics = (searchValue) => async (dispatch) => {
     };
     const body = JSON.stringify({ searchValue });
     const res = await axios.put(
-      `http://localhost:7000/api/posts/search_for_post`,
+      `http://localhost:8000/api/posts/search_for_post`,
       body,
       config
     );

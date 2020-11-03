@@ -7,7 +7,7 @@ import {
   export const getMostLikedPosts = () => async (dispatch) => {
     try {
       const res = await axios.get(
-        "http://localhost:7000/api/posts/most_liked"
+        "http://localhost:8000/api/posts/most_liked"
       );
       dispatch({ type: MOST_LIKED_POSTS, payload: res.data });
     } catch (error) {

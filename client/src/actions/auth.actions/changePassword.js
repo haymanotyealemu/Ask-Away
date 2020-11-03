@@ -14,7 +14,7 @@ import {
       };
       const body = JSON.stringify({ newPassword });
       const res = await axios.put(
-        "http://localhost:7000/api/users/change_password",
+        "http://localhost:9000/api/users/change_password",
         body,
         config
       );

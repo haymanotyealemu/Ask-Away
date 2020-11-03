@@ -5,7 +5,7 @@ import axios from "axios";
 export const removePost = (post_id) => async (dispatch) => {
   try {
     const res = await axios.delete(
-      `http://localhost:7000/api/posts/delete_post/${post_id}`
+      `http://localhost:8000/api/posts/delete_post/${post_id}`
     );
     dispatch({ type: REMOVE_POST, payload: res.data });
     dispatch(getUserPosts());

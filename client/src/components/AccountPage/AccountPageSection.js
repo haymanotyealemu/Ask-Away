@@ -1,10 +1,10 @@
 import React from "react";
 import SingleAccountData from "./SingleAccountData";
 
-const AccountPageSection = ({ firsName, lastName, userName, email }) => {
+const AccountPageSection = ({ firstName, lastName, userName, email }) => {
   return (
     <div className="data-items">
-      <SingleAccountData dataName="First Name:" dataToShow={firsName} />
+      <SingleAccountData dataName="First Name:" dataToShow={firstName} />
 
       <SingleAccountData dataName="Last Name:" dataToShow={lastName} />
 

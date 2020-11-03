@@ -15,7 +15,7 @@ import {
       };
       const body = JSON.stringify({ changeUserData });
       const response = await axios.put(
-        `http://localhost:7000/api/users/change_user_data/${userDataToChange}`,
+        `http://localhost:8000/api/users/change_user_data/${userDataToChange}`,
         body,
         config
       );

@@ -13,7 +13,7 @@ export const createComment = (commentText , post_id) => async (
     };
     const body = JSON.stringify({ commentText });
     const res = await axios.put(
-      `http://localhost:7000/api/posts/add_comment/${post_id}`,
+      `http://localhost:8000/api/posts/add_comment/${post_id}`,
       body,
       config
     );

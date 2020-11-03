@@ -16,7 +16,7 @@ export const loginUser = (userData) => async (dispatch) => {
     const body = JSON.stringify(userData);
 
     const response = await axios.post(
-      "http://localhost:7000/api/users/login",
+      "http://localhost:8000/api/users/login",
       body,
       config
     );

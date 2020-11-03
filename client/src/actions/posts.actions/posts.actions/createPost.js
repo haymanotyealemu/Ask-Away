@@ -10,7 +10,7 @@ export const createPost = (postText) => async (dispatch) => {
     };
     const body = JSON.stringify({ postText });
     const res = await axios.post(
-      `http://localhost:7000/api/posts`,
+      `http://localhost:8000/api/posts`,
       body,
       config
     );

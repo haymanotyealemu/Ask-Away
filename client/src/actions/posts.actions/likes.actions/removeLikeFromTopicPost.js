@@ -15,7 +15,7 @@ export const removeLikeFromTopicPost = (
 ) => async (dispatch) => {
   try {
     const res = await axios.delete(
-      `http://localhost:7000/api/posts/remove_like/${post_id}/${like_id}`
+      `http://localhost:8000/api/posts/remove_like/${post_id}/${like_id}`
     );
     dispatch({
       type: REMOVE_LIKE,

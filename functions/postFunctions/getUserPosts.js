@@ -1,6 +1,10 @@
 const Post = require('../../models/Post');
 // get user posts by middleware
+
+
 module.exports = async (req, res) => {
+
+  console.log("test")
   try {
     let posts = await Post.find();
     let userPosts = posts.filter(
