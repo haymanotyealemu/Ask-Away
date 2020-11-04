@@ -28,20 +28,20 @@ const NavbarLinks = ({ isLoggedIn, logOut }) => {
         Sign Up
       </Link>
 
+      {/* <Link
+        to="/account"
+        className="href__style__remove nav__link"
+        style={{ display: isLoggedIn ? "flex" : "none" }}
+      >
+        Account <i className="fas fa-address-card"></i>
+      </Link> */}
+
       <Link
         to="/account"
         className="href__style__remove nav__link"
         style={{ display: isLoggedIn ? "flex" : "none" }}
       >
         Account <i className="fas fa-address-card"></i>
-      </Link>
-
-      <Link
-        to="/dashboard"
-        className="href__style__remove nav__link"
-        style={{ display: isLoggedIn ? "flex" : "none" }}
-      >
-        Dashboard <i className="fas fa-user"></i>
       </Link>
 
       <Link

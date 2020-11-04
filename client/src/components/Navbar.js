@@ -62,6 +62,15 @@ const Navbar = ({ logOut, auth: { isLoggedIn } }) => {
             Add question
           </Link>
 
+          {/* <Link
+            className="sidebar-link"
+            to="/account"
+            onClick={() => setSidebar(false)}
+            style={{ display: isSidebar && isLoggedIn ? "block" : "none" }}
+          >
+            Account
+          </Link> */}
+
           <Link
             className="sidebar-link"
             to="/account"
@@ -69,15 +78,6 @@ const Navbar = ({ logOut, auth: { isLoggedIn } }) => {
             style={{ display: isSidebar && isLoggedIn ? "block" : "none" }}
           >
             Account
-          </Link>
-
-          <Link
-            className="sidebar-link"
-            to="/dashboard"
-            onClick={() => setSidebar(false)}
-            style={{ display: isSidebar && isLoggedIn ? "block" : "none" }}
-          >
-            Dashboard
           </Link>
 
           <Link

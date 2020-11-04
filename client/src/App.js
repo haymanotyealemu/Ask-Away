@@ -2,14 +2,13 @@ import React, { useEffect } from "react";
 import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
-import Dashboard from "./pages/Dashboard";
+import Account from "./pages/Account";
 import ContactPage from "./pages/ContactPage";
 import ChangeProfile from "./pages/ChangeProfile";
 import UserProfile from "./pages/UserProfile.js";
 import TopicPage from "./pages/TopicPage";
 import Topics from "./pages/Topics.js";
 import Users from "./pages/Users";
-import Account from "./pages/Account";
 import AddPost from "./pages/AddPost";
 import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -21,6 +20,7 @@ import IsLoggedInRoute from "./routes/IsLoggedInRoute";
 import PrivateRoute from "./routes/PrivateRoute";
 import "./App.css";
 import ChangePassword from "./pages/ChangePassword";
+import YourProfile from "./pages/YourProfile";
 
 if (localStorage.getItem("token")) {
   setAuthenticationToken(localStorage.getItem("token"));
@@ -48,14 +48,19 @@ const App = () => {
             exact
             component={ChangePassword}
           />
-          <PrivateRoute path="/dashboard" exact component={Dashboard} />
+          <PrivateRoute path="/account" exact component={Account} />
           <PrivateRoute path="/add-post" exact component={AddPost} />
           <PrivateRoute
             path="/change-profile"
             exact
             component={ChangeProfile}
           />
-          <PrivateRoute path="/account" exact component={Account} />
+          <PrivateRoute
+            path="/your-profile"
+            exact
+            component={YourProfile}
+          />
+          {/* <PrivateRoute path="/account" exact component={Account} /> */}
         </Switch>
       </Provider>
     </Router>

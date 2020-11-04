@@ -1,49 +1,42 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { getUserPosts } from "../actions/users.actions/getUserPosts";
-import UserPostsWrapper from "./UserPosts/UserPostsWrapper";
-import AccountPageSection from "../components/AccountPage/AccountPageSection";
+import React from "react";
+import askaway2 from "../askaway2.png";
+import { Link } from "react-router-dom";
 
-const Account = ({
-  getUserPosts,
-  auth: { firstName, lastName, userName, avatar, email },
-  users: { profilePosts },
-}) => {
-  useEffect(() => {
-    getUserPosts();
-  }, []);
+const Account = () => {
   return (
-    <div className="account-page-wrapper">
-      <div className="data">
-        <img src={avatar} alt="" />
-
-        <AccountPageSection
-          firstName={firstName}
-          lastName={lastName}
-          email={email}
-          userName={userName}
-        />
+    <div className="dashboard-wrapper">
+      <div className="image-wrapper">
+        <img src={askaway2} alt="" className="dashboard-image" />
       </div>
 
-      <div className="user-posts">
-        <header className="user-posts-header-wrapper app_color_background">
-          {profilePosts !== null || profilePosts !== [] ? (
-            <p className="user-posts-header font__p font__bold">Your topics</p>
-          ) : (
-            <p className="user-posts-header font__p font__bold">
-              You haven't made any posts yet
-            </p>
-          )}
-        </header>
-        <UserPostsWrapper posts={profilePosts} />
+      <div className="dashboard-links-wrapper">
+        <div className="dashboard-links">
+        <div className="dashboard-link font__p font__bold p__size">
+            <Link to="/your-profile" className="dashboard-link-href">
+              Your Profile
+            </Link>
+        </div>
+          <div className="dashboard-link font__p font__bold p__size">
+            <Link to="/change-profile" className="dashboard-link-href">
+              Change Profile
+            </Link>
+          </div>
+
+          <div className="dashboard-link font__p font__bold p__size">
+            <Link to="/contact-us" className="dashboard-link-href">
+              Contact Us
+            </Link>
+          </div>
+
+          <div className="dashboard-link font__p font__bold p__size">
+            <Link to="/change-password" className="dashboard-link-href">
+              Change password
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-  users: state.users,
-});
-
-export default connect(mapStateToProps, { getUserPosts })(Account);
+export default Account;
