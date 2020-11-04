@@ -44,7 +44,7 @@ router.put(
 );
 
 router.put(
-  '/check_actual_password',
+  '/check_password',
   authentication,
   verifyPasswordValidator,
   checkPassword
@@ -66,7 +66,7 @@ module.exports = router;
 
 
 
-
+//**************************************************************************************************** */
 
 // let User = require('../models/User');
 // const bcrypt = require('bcryptjs');

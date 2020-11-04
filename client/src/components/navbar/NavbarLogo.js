@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import askaway from "../../askaway.jpg";
+import askaway2 from "../../askaway2.png";
 
 const NavbarLogo = () => {
   return (
     <div className="logo-wrapper">
       <Link to="/">
-        <img src={askaway} alt="" />
+        <img src={askaway2} alt="" />
       </Link>
     </div>
   );

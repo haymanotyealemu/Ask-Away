@@ -1,12 +1,12 @@
 import React from "react";
-import askaway from "../askaway.jpg";
+import askaway2 from "../askaway2.png";
 import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   return (
     <div className="dashboard-wrapper">
       <div className="image-wrapper">
-        <img src={askaway} alt="" className="dashboard-image" />
+        <img src={askaway2} alt="" className="dashboard-image" />
       </div>
 
       <div className="dashboard-links-wrapper">

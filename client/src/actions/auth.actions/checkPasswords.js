@@ -13,7 +13,7 @@ import {
       };
       const body = JSON.stringify({ passwordToCheck });
       const res = await axios.put(
-        "http://localhost:8000/api/users/check_acutal_password",
+        "http://localhost:8000/api/users/check_password",
         body,
         config
       );
@@ -21,6 +21,7 @@ import {
         type: CHECK_PASSWORDS,
         payload: res.data,
       });
+      // alert("Password change succesful");
     } catch (error) {
       dispatch({
         type: CHANGE_PASSWORD_FAIL,

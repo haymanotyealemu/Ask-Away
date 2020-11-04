@@ -7,21 +7,21 @@ const UserProfileData = ({ userProfile }) => {
         <p style={{ marginRight: ".4em" }} className="font__bold">
           first Name:
         </p>
-        {userProfile.first_name}
+        {userProfile.firstName}
       </div>
 
       <div className="font__p data-item">
         <p style={{ marginRight: ".4em" }} className="font__bold">
           Last Name:
         </p>{" "}
-        {userProfile.last_name}
+        {userProfile.lastName}
       </div>
 
       <div className="font__p data-item">
         <p style={{ marginRight: ".4em" }} className="font__bold">
           Username:
         </p>{" "}
-        {userProfile.username}
+        {userProfile.userName}
       </div>
 
       <div className="font__p data-item">

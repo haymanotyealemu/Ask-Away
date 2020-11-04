@@ -14,7 +14,7 @@ import {
       };
       const body = JSON.stringify({ newPassword });
       const res = await axios.put(
-        "http://localhost:9000/api/users/change_password",
+        "http://localhost:8000/api/users/change_password",
         body,
         config
       );
@@ -23,6 +23,7 @@ import {
         payload: res.data,
       });
       dispatch(userLoaded());
+      // alert("Password Updated");
     } catch (error) {
       dispatch({
         type: CHANGE_PASSWORD_FAIL,
