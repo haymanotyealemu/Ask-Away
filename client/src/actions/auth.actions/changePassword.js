@@ -23,7 +23,7 @@ import {
         payload: res.data,
       });
       dispatch(userLoaded());
-      alert("Password Updated");
+      // alert("Password Updated");
     } catch (error) {
       dispatch({
         type: CHANGE_PASSWORD_FAIL,

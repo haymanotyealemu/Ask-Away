@@ -26,7 +26,7 @@ router.get('/', authentication, getUserByMiddleware);
 
 router.get('/user_email/:email', getUserByEmail);
 
-router.get('/allusers', getUsers);
+router.get('/users', getUsers);
 
 router.get('/user_by_id/:user_id', getUsersById);
 

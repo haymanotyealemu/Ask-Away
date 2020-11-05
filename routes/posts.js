@@ -14,7 +14,7 @@ const getMostRecentPosts = require('../functions/postFunctions/getMostRecentPost
 const getMostCommentedPost = require('../functions/postFunctions/getMostCommentedPost');
 const getPostById = require('../functions/postFunctions/getPostById');
 const getUsersPostsById = require('../functions/postFunctions/getUsersPostsById');
-const getUserPosts = require('../functions/postFunctions/getUserPosts');
+const getUserPostsByMiddleware = require('../functions/postFunctions/getUserPostsByMiddleware');
 const createPost = require('../functions/postFunctions/createPost');
 const searchForPost = require('../functions/postFunctions/searchForPost');
 const addLike = require('../functions/postFunctions/addLike');
@@ -38,7 +38,7 @@ router.get('/:post_id', getPostById);
 
 router.get('/user_posts/:user_id', getUsersPostsById);
 
-router.get('/user_posts', authentication, getUserPosts);
+router.get('/user_posts', authentication, getUserPostsByMiddleware);
 
 router.post('/', authentication, createPostValidator, createPost);
 

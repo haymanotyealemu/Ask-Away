@@ -12,7 +12,7 @@ const Account = () => {
       <div className="dashboard-links-wrapper">
         <div className="dashboard-links">
         <div className="dashboard-link font__p font__bold p__size">
-            <Link to="/your-profile" className="dashboard-link-href">
+            <Link to="/my-profile" className="dashboard-link-href">
               My Profile
             </Link>
         </div>

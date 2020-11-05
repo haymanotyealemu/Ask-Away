@@ -20,7 +20,7 @@ import IsLoggedInRoute from "./routes/IsLoggedInRoute";
 import PrivateRoute from "./routes/PrivateRoute";
 import "./App.css";
 import ChangePassword from "./pages/ChangePassword";
-import YourProfile from "./pages/YourProfile";
+import MyProfile from "./pages/MyProfile";
 
 if (localStorage.getItem("token")) {
   setAuthenticationToken(localStorage.getItem("token"));
@@ -56,9 +56,9 @@ const App = () => {
             component={ChangeProfile}
           />
           <PrivateRoute
-            path="/your-profile"
+            path="/my-profile"
             exact
-            component={YourProfile}
+            component={MyProfile}
           />
           {/* <PrivateRoute path="/account" exact component={Account} /> */}
         </Switch>
