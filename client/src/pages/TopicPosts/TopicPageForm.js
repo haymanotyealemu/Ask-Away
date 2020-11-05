@@ -13,7 +13,7 @@ const TopicPageForm = ({ auth, createComment, post }) => {
         className="app_color_font font__bold font__p topics-headline"
         style={{ textAlign: "center" }}
       >
-        Create Comment
+        Create Post
       </p>
 
       <textarea

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_USER_POSTS, USER_ERROR} from "../../constants/users.contants";
+import { GET_USER_POSTS, USER_ERROR} from "../../constants/users.constants";
 
 export const getUserPosts = () => async (dispatch) => {
     try {

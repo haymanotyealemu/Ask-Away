@@ -9,12 +9,13 @@ export const searchByUsername = (searchValue ) => async (dispatch) => {
                 "Content-Type": "application/json",
             },
         };
-        const body = JSON.stringify({ searchValue  });
-        const response = await axios.put(`http://localhost:8000/api/users/search_by_username`,
+        const body = JSON.stringify({ searchValue });
+        const res = await axios.put(`http://localhost:8000/api/users/search_by_username`,
         body,
         config
         );
-        dispatch({ type:SEARCH_BY_USERNAME, payload: response.data});
+        dispatch({ type:SEARCH_BY_USERNAME, 
+                    payload: res.data});
     } catch (error) {
         dispatch({
             type: USER_ERROR,

@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { getUserPosts } from "../actions/users.actions/getUserPosts";
-
-
 import UserPostsWrapper from "./UserPosts/UserPostsWrapper";
 import AccountPageSection from "../components/AccountPage/AccountPageSection";
 

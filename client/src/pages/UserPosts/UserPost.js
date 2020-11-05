@@ -6,6 +6,7 @@ import Spinner from "../../Spinner";
 import Moment from "react-moment";
 
 const UserPost = ({ post, removePost, auth }) => {
+  console.log(post);
   return post === null || !post ? (
     <div className="all-page-wrapper flex__center">
       <Spinner />

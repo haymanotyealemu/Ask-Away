@@ -17,13 +17,16 @@ const ChangePassword = ({
     firstPassword: "",
     secondPassword: "",
     newPassword: "",
+    
   });
 
   let { firstPassword, secondPassword, newPassword } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-
+    const resetSentData = () => {
+      setFormData("");
+    };
   const submitData = () => {
     if (firstPassword !== secondPassword) {
       setArePasswordsWrong(true);
@@ -104,18 +107,22 @@ const ChangePassword = ({
               type="text"
             />
 
-            <div
-              className="password-page-button"
+            <div className="change-profile-buttons-wrapper">
+              <div className="password-page-button"
               style={{
                 marginTop: ".5em",
               }}
               onClick={() => {
                 changePassword(newPassword);
                 setIsSubmitted(true);
-              }}
-            >
-              Submit
-            </div>
+              }}> Submit
+              </div>
+              <div className="password-page-button"style={{
+                marginTop: ".5em",
+              }} onClick={() => resetSentData()}>
+              Go back
+              </div>
+          </div>
           </div>
         </form>
       )}
