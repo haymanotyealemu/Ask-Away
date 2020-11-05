@@ -1,5 +1,5 @@
 import React from "react";
-import askaway2 from "../askaway2.png";
+import askaway from "../askaway.png";
 import { Link } from "react-router-dom";
 
 const LandingPage = () => {
@@ -27,7 +27,7 @@ const LandingPage = () => {
         </div>
       </div>
       <div className="image-wrapper">
-        <img src={ askaway2 } className="landing-image" alt="" />
+        <img src={ askaway } className="landing-image" alt="" />
       </div>
     </div>
   );

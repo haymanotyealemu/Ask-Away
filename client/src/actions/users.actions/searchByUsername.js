@@ -1,11 +1,11 @@
 import axios from "axios";
-import { USER_ERROR} from "../../constants/users.contants";
+import { USER_ERROR} from "../../constants/users.constants";
 import { SEARCH_BY_USERNAME } from "../../constants/auth.constants";
 
 export const searchByUsername = (searchValue ) => async (dispatch) => {
     try {
         const config = {
-            header: {
+            headers: {
                 "Content-Type": "application/json",
             },
         };

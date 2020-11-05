@@ -1,19 +1,19 @@
 import React from "react";
-import askaway2 from "../askaway2.png";
+import askaway from "../askaway.png";
 import { Link } from "react-router-dom";
 
 const Account = () => {
   return (
     <div className="dashboard-wrapper">
       <div className="image-wrapper">
-        <img src={askaway2} alt="" className="dashboard-image" />
+        <img src={askaway} alt="" className="dashboard-image" />
       </div>
 
       <div className="dashboard-links-wrapper">
         <div className="dashboard-links">
         <div className="dashboard-link font__p font__bold p__size">
             <Link to="/your-profile" className="dashboard-link-href">
-              Your Profile
+              My Profile
             </Link>
         </div>
           <div className="dashboard-link font__p font__bold p__size">

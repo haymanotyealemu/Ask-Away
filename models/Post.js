@@ -15,12 +15,13 @@ let PostSchema = mongoose.Schema({
         type: String,
         
     },
-    avatar: {
-        type: String
-    },
     userName: {
         type: String,
     },
+    avatar: {
+        type: String
+    },
+
     date: { 
         type: Date,
         default: Date.now()
@@ -43,15 +44,16 @@ let PostSchema = mongoose.Schema({
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "user"
             },
+
             firstName:{
                 type: String,
                 required: true
             },
-            commentText: {
-                type: String,
-            },
             avatar: {
                 type: String
+            },
+            commentText: {
+                type: String,
             },
             date: {
                 type: Date,

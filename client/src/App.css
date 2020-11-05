@@ -8,7 +8,8 @@ html {
 html body {
     margin: 0;
     padding: 0;
-    background: #fffefe;
+    background-color: #f4f4f4
+
 }
 
 html body .flex__center {
@@ -47,7 +48,7 @@ html body .p__size {
 }
 
 html body .app_color_font {
-    color: #3cd1fd;
+    color: black;
 }
 
 html body .app_color_background {
@@ -93,6 +94,7 @@ html body .main__nav {
     flex-wrap: wrap;
     width: 100vw;
     height: 10vh;
+    /* background-color: #4d4f53; */
 }
 
 html body .main__nav .logo-wrapper {
@@ -124,6 +126,7 @@ html body .main__nav .nav-links {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
+    
 }
 
 @media (min-width: 1024px) {

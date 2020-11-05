@@ -1,16 +1,20 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { getUserPosts } from "../actions/users.actions/getUserPosts";
+
+
 import UserPostsWrapper from "./UserPosts/UserPostsWrapper";
 import AccountPageSection from "../components/AccountPage/AccountPageSection";
 
+
 const YourProfile = ({
-    getUserPosts,
+  getUserPosts,
     auth: { firstName, lastName, userName, avatar, email },
-    users: { profilePosts },
+    users: { profilePosts }
+    
 }) => {
     useEffect(() => {
-    getUserPosts();
+      getUserPosts ();
     }, []);
     return (
     <div className="account-page-wrapper">
@@ -46,4 +50,4 @@ const mapStateToProps = (state) => ({
   users: state.users,
 });
 
-export default connect(mapStateToProps, { getUserPosts })(YourProfile);
+export default connect(mapStateToProps, {  getUserPosts })(YourProfile);

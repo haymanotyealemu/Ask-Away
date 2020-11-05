@@ -10,12 +10,12 @@ module.exports = async (req, res) => {
       return res.status(404).json({ errors: errors.array() });
 
     let users = await User.find().select('-password');
-    let searchUsers = users.filter(
+    let findUserByUsername = users.filter(
       (user) =>
         user.userName.toString().toLowerCase().split(' ').join('') ===
         searchValue.toString().toLowerCase().split(' ').join('')
     );
-    res.json(searchUsers);
+    res.json(findUserByUsername);
   } catch (error) {
     console.error(error.message);
     return res.status(500).send('Server error');
