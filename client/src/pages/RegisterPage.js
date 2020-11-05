@@ -31,7 +31,7 @@ const RegisterPage = ({ registerUser, error }) => {
           </header>
 
           <div className="label-wrapper">
-            <label className="label__register p__size">firstName</label>
+            <label className="label__register p__size">First Name</label>
           </div>
 
           <input

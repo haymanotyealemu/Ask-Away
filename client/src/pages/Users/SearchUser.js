@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { getUsers } from "../../actions/users.actions/getUsers";
 import { searchByUsername } from "../../actions/users.actions/searchByUsername";
 
+
 const SearchUser = () => {
   let [searchedUsername, setSearchedUsername] = useState("");
 
@@ -31,6 +32,7 @@ const SearchUser = () => {
           Search for user
         </div>
       </form>
+      
     </header>
   );
 };

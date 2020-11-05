@@ -10,7 +10,6 @@ const Navbar = ({ logOut, auth: { isLoggedIn } }) => {
   return (
     <nav className="main__nav">
       <NavbarLogo />
-
       <NavbarLinks logOut={logOut} isLoggedIn={isLoggedIn} />
 
       <div className="hamburger-wrapper">
