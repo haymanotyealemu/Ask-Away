@@ -1,6 +1,8 @@
 import React from "react";
-import askaway from "../askaway.jpg";
+import AskAway2 from "../AskAway2.jpg";
 import { Link } from "react-router-dom";
+
+import './LandingPage.css'
 
 const LandingPage = () => {
   return (
@@ -22,12 +24,12 @@ const LandingPage = () => {
             <li>or You just want to share Your story</li>
           </ul>
           <div className="text-button-wrapper">
-            <Link to="/register">Register in</Link> and add post!
+            <Link to="/register">Register</Link> and add post!
           </div>
         </div>
       </div>
       <div className="image-wrapper">
-        <img src={ askaway } className="landing-image" alt="" />
+        <img src={ AskAway2} className="landing-image" alt="" />
       </div>
     </div>
   );
