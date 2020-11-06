@@ -3,15 +3,18 @@ html {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     overflow-x: hidden;
+    background-color: rgba(241, 240, 240, 0.856);
 }
 
 html body {
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4
+ 
 
 }
-
+.larger {
+    font-size: 46px;
+}
 html body .flex__center {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -41,6 +44,24 @@ html body .p__size {
     font-size: 1.2em;
 }
 
+.style {
+    font-family: Kaushan Script;
+    font-weight: bold;
+}
+
+.image {
+    width: 80%;
+    height: 80%
+}
+
+.image2 {
+    width: 15%;
+    height: 10%;
+    position: relative;
+    padding-bottom: 28px;
+    padding-left: 28px;
+}
+
 @media (min-width: 1024px) {
     html body .p__size {
         font-size: 1.4em;
@@ -48,7 +69,7 @@ html body .p__size {
 }
 
 html body .app_color_font {
-    color: black;
+    color: #3cd1fd;
 }
 
 html body .app_color_background {
@@ -94,7 +115,8 @@ html body .main__nav {
     flex-wrap: wrap;
     width: 100vw;
     height: 10vh;
-    /* background-color: #4d4f53; */
+    background-color: rgb(54, 85, 223);
+   
 }
 
 html body .main__nav .logo-wrapper {
@@ -139,6 +161,7 @@ html body .main__nav .nav-links .nav__link {
     font-size: 1em;
     -webkit-transition: border 0.2s ease-in-out;
     transition: border 0.2s ease-in-out;
+    float: left;
 }
 
 @media (max-width: 1024px) {
@@ -1361,8 +1384,9 @@ textarea {
 
 @media (min-width: 1024px) {
     .link-to-post-page-button {
-        height: 60px !important;
+        height: 50px !important;
         width: 100px !important;
+        
     }
 }
 
@@ -1381,6 +1405,7 @@ textarea {
     height: 100%;
     color: #f4f4f4;
     text-decoration: none;
+    
 }
 
 .link-to-post-page-button:hover {

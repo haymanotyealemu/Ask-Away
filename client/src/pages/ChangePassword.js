@@ -28,6 +28,7 @@ const ChangePassword = ({
     if (firstPassword !== secondPassword) {
       setArePasswordsWrong(true);
       setAreNotPasswordsFullfiled(false);
+      alert("Passwords are wrong!");
     } else if (
       firstPassword === "" ||
       firstPassword === null ||
@@ -35,10 +36,20 @@ const ChangePassword = ({
       secondPassword === null
     ) {
       setAreNotPasswordsFullfiled(true);
+      alert("You haven't fullfiled some input");
     } else {
       checkPasswords(firstPassword);
     }
   };
+  // const submitNewPasswordData = ({newPassword}) =>{
+  //   if (newPassword === null || ""){
+  //     alert("Password hasn't changed, something went wrong...");
+  //   }
+  //   else{
+  //     changePassword(newPassword);
+  //     alert("Password has changed");
+  //   }
+  // }
 
   return (
     <div className="change-profile-page-wrapper">
@@ -72,7 +83,7 @@ const ChangePassword = ({
             />
           </div>
 
-          {areNotPasswordsFullfiled && (
+          {/* {areNotPasswordsFullfiled && (
             <ErrorMessage errorMessage="You haven't fullfiled some input" />
           )}
 
@@ -82,8 +93,10 @@ const ChangePassword = ({
 
           {errors === false && (errors !== {} || errors !== null) && (
             <ErrorMessage errorMessage="Something went wrong..." />
-          )}
-          <div className="password-page-button" onClick={(e) => submitData(e)}>
+          )} */}
+          <div className="password-page-button" style={{
+            marginTop: ".5em",
+            }} onClick={(e) => submitData(e)}>
             Submit
           </div>
         </form>

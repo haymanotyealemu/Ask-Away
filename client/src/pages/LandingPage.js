@@ -1,5 +1,5 @@
 import React from "react";
-import askaway from "../askaway.png";
+import comment3 from "../comment3.jpg";
 import { Link } from "react-router-dom";
 
 const LandingPage = () => {
@@ -8,11 +8,11 @@ const LandingPage = () => {
       <div className="text-wrapper">
         <div className="text-header-wrapper">
           <p className="text-header font__p p__size">Welcome in</p>
-          <span>Ask Away! </span>
+          <span className="larger">Ask Away! </span>
         </div>
 
         <div className="text-section font__p p__size">
-          It is new forum about achieving success
+        <span className='app_color_font style'>Ask Away!</span> is a new forum about achieving success
           <br />
           If You are looking for answers on questions like:
           <ul>
@@ -27,7 +27,7 @@ const LandingPage = () => {
         </div>
       </div>
       <div className="image-wrapper">
-        <img src={ askaway } className="landing-image" alt="" />
+        <img src={ comment3 } className="image" alt="" />
       </div>
     </div>
   );
