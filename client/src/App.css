@@ -158,10 +158,11 @@ html body .main__nav .nav-links {
 }
 
 html body .main__nav .nav-links .nav__link {
-    font-size: 1em;
+    font-size: 1.5em;
     -webkit-transition: border 0.2s ease-in-out;
     transition: border 0.2s ease-in-out;
     float: left;
+    color: whitesmoke
 }
 
 @media (max-width: 1024px) {

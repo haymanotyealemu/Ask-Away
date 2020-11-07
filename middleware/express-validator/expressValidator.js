@@ -46,7 +46,7 @@ module.exports.createPostValidator = [
 ];
 
 module.exports.searchPostValidator = [
-  check('searchValue', 'Search is empty').not().isEmpty(),
+  check('searchPost', 'Search is empty').not().isEmpty(),
 ];
 
 module.exports.addCommentValidator = [

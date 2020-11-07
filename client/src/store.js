@@ -1,5 +1,6 @@
 import { composeWithDevTools } from "redux-devtools-extension";
 import { createStore, applyMiddleware } from "redux";
+// responsible for making asynchrnous calls.
 import thunk from "redux-thunk";
 // this is a method from redux that allows us to store diffrent reducers
 import rootReducer from "./reducers";

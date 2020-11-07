@@ -60,7 +60,6 @@ const App = () => {
             exact
             component={MyProfile}
           />
-          {/* <PrivateRoute path="/account" exact component={Account} /> */}
         </Switch>
       </Provider>
     </Router>

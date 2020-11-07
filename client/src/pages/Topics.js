@@ -169,7 +169,7 @@ const Topics = ({
 
         <form className="search-topic-wrapper">
           <textarea
-            type="submit"
+            type="text"
             value={dataFromSearch}
             onChange={(e) => onChange(e)}
           />
