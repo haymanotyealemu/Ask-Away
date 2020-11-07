@@ -13,7 +13,7 @@ import {
       };
       const body = JSON.stringify({ passwordToCheck });
       const res = await axios.put(
-        "http://localhost:8000/api/users/check_password",
+        "https://whispering-depths-80857.herokuapp.com/api/users/check_password",
         body,
         config
       );

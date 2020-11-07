@@ -16,7 +16,7 @@ export const loginUser = (userData) => async (dispatch) => {
     const body = JSON.stringify(userData);
 
     const response = await axios.post(
-      "http://localhost:8000/api/users/login",
+      "https://whispering-depths-80857.herokuapp.com/api/users/login",
       body,
       config
     );

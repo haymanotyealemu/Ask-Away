@@ -4,7 +4,7 @@ import axios from "axios";
 export const getPost = (post_id) => async (dispatch) => {
   try {
     const res = await axios.get(
-      `http://localhost:8000/api/posts/${post_id}`
+      `https://whispering-depths-80857.herokuapp.com/api/posts/${post_id}`
     );
     dispatch({ type: GET_POST, payload: res.data });
   } catch (error) {

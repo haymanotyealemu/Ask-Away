@@ -14,7 +14,7 @@ import {
       };
       const body = JSON.stringify({ newPassword });
       const res = await axios.put(
-        "http://localhost:8000/api/users/change_password",
+        "https://whispering-depths-80857.herokuapp.com/api/users/change_password",
         body,
         config
       );

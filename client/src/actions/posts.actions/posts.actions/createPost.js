@@ -10,7 +10,7 @@ export const createPost = (postText) => async (dispatch) => {
     };
     const body = JSON.stringify({ postText });
     const res = await axios.post(
-      `http://localhost:8000/api/posts`,
+      `https://whispering-depths-80857.herokuapp.com/api/posts`,
       body,
       config
     );

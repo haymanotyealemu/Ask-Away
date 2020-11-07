@@ -10,7 +10,7 @@ export const searchTopics = (searchPost) => async (dispatch) => {
     };
     const body = JSON.stringify({ searchPost});
     const res = await axios.put(
-      `http://localhost:8000/api/posts/search_for_post`,
+      `https://whispering-depths-80857.herokuapp.com/api/posts/search_for_post`,
       body,
       config
     );

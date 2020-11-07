@@ -5,7 +5,7 @@ import { getPost } from "../posts.actions/getPost";
 export const addLikeToTopicPage = (post_id) => async (dispatch) => {
   try {
     const res = await axios.put(
-      `http://localhost:8000/api/posts/likes/${post_id}`
+      `https://whispering-depths-80857.herokuapp.com/api/posts/likes/${post_id}`
     );
     dispatch({ type: ADD_LIKE, payload: res.data });
     dispatch(getPost(post_id));

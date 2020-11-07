@@ -4,7 +4,7 @@ import axios from "axios";
 export const getMostCommentedPosts = () => async (dispatch) => {
   try {
     const res = await axios.get(
-      "http://localhost:8000/api/posts/most_comments"
+      "https://whispering-depths-80857.herokuapp.com/api/posts/most_comments"
     );
     dispatch({ type: MOST_COMMENTED, payload: res.data });
   } catch (error) {

@@ -15,7 +15,7 @@ import {
       };
       const body = JSON.stringify({ changeUserData });
       const response = await axios.put(
-        `http://localhost:8000/api/users/change_user_data/${userDataToChange}`,
+        `https://whispering-depths-80857.herokuapp.com/api/users/change_user_data/${userDataToChange}`,
         body,
         config
       );

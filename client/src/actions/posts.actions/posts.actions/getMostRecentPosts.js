@@ -7,7 +7,7 @@ import {
   export const getMostRecentPosts = () => async (dispatch) => {
     try {
       const res = await axios.get(
-        "http://localhost:8000/api/posts/most_recent"
+        "https://whispering-depths-80857.herokuapp.com/api/posts/most_recent"
       );
       dispatch({ type: THE_MOST_RECENT_POSTS, payload: res.data });
     } catch (error) {

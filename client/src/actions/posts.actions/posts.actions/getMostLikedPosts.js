@@ -7,7 +7,7 @@ import {
   export const getMostLikedPosts = () => async (dispatch) => {
     try {
       const res = await axios.get(
-        "http://localhost:8000/api/posts/most_liked"
+        "https://whispering-depths-80857.herokuapp.com/api/posts/most_liked"
       );
       dispatch({ type: MOST_LIKED_POSTS, payload: res.data });
     } catch (error) {

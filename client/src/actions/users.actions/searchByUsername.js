@@ -10,7 +10,7 @@ export const searchByUsername = (searchValue ) => async (dispatch) => {
             },
         };
         const body = JSON.stringify({ searchValue });
-        const res = await axios.put(`http://localhost:8000/api/users/search_by_username`,
+        const res = await axios.put(`https://whispering-depths-80857.herokuapp.com/api/users/search_by_username`,
         body,
         config
         );

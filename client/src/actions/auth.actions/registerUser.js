@@ -16,7 +16,7 @@ export const registerUser = (userData) => async (dispatch) => {
     const body = JSON.stringify(userData);
 
     const response = await axios.post(
-      "http://localhost:8000/api/users/register",
+      "https://whispering-depths-80857.herokuapp.com/api/users/register",
       body,
       config
     );

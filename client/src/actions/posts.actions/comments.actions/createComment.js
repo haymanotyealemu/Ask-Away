@@ -13,7 +13,7 @@ export const createComment = (commentText , post_id) => async (
     };
     const body = JSON.stringify({ commentText });
     const res = await axios.put(
-      `http://localhost:8000/api/posts/add_comment/${post_id}`,
+      `https://whispering-depths-80857.herokuapp.com/api/posts/add_comment/${post_id}`,
       body,
       config
     );
