@@ -1,6 +1,9 @@
 # Ask-Away
-![Made by@](https://img.shields.io/badge/Made-By@-haymanot-John-Katrina-Michelle-brightgreen.svg)
-![License](https://img.shields.io/badge/License-none-blue.svg)
+![MadeBy@](https://img.shields.io/badge/MadeBy@-haymanot.W-brightgreen.svg)
+![MadeBy@](https://img.shields.io/badge/MadeBy@-John.K-brightgreen.svg)
+![MadeBy@](https://img.shields.io/badge/MadeBy@-Katrina.H-brightgreen.svg)
+![MadeBy@](https://img.shields.io/badge/MadeBy@-Michelle.W-brightgreen.svg)
+![License](https://img.shields.io/badge/License-MIT-blue.svg)
 
 ## Description
 A social media app build using the MERN full-stack approach where the user able to have make requests such as Ask questions, Answer questions, Like and comments on posts, add likes to comments, remove your own posts and likes, make a profile and password changes, searching a specific topic and searching the user by their username.
