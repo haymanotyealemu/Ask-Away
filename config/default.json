@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://hjmk2020:hjmk2020@finalproject.tlxel.mongodb.net/ask-away?retryWrites=true&w=majority",
+    "jsonWebTokenSecret":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWY5Nzk5ODQ3MTdlNGQyYzkwYmI2NjYwIn0sImlhdCI6MTYwMzc3MDc1NiwiZXhwIjoxNjAzNzc0MzU2fQ.eGtwsfTbuvGActjYcaSfpnRa18xf5O2XidWZu3qCrF8"
+}
