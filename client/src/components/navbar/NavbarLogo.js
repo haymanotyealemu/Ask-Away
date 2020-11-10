@@ -1,11 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import comment3 from "../../comment3.jpg";
+
 const NavbarLogo = () => {
   return (
     <div className="logo-wrapper">
-      <Link to="/">
-        <img className="image2" src={comment3} alt="logo" />
+      <Link to="/" className="text-logo">
+        <ul>
+          <li>A</li>
+          <li>S</li>
+          <li>K</li>
+          <li>-</li>
+          <li>A</li>
+          <li>W</li>
+          <li>A</li>
+          <li>Y</li>
+        </ul>
       </Link>
     </div>
   );
