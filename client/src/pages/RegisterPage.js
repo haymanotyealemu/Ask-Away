@@ -89,8 +89,8 @@ const RegisterPage = ({ registerUser, error }) => {
 
           <div className="label-wrapper">
             <p className="p__size font__p password__info">
-              <i className="fas fa-user-check app_color_font"></i> Password must
-              have at least 6 letters
+              <i className="fas fa-user-check app_color_font"></i> The length of Password must be between 6 and 12 characters!.
+              
             </p>
           </div>
 

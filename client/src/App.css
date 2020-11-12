@@ -1216,14 +1216,17 @@ html body .href__style__remove {
     transition: background 0.4s ease-in-out;
 }
 
-.register-page-wrapper .register-section .inputs-wrapper .button-wrapper:hover,
+
 .register-page-wrapper .change-profile-section .inputs-wrapper .button-wrapper:hover,
 .change-profile-page-wrapper .register-section .inputs-wrapper .button-wrapper:hover,
 .change-profile-page-wrapper .change-profile-section .inputs-wrapper .button-wrapper:hover {
     cursor: pointer;
     background: #37c1eb;
 }
-
+.register-page-wrapper .register-section .inputs-wrapper .button-wrapper:hover{
+    cursor: pointer;
+    background: #4CAF50;
+}
 .register-page-wrapper .register-section .inputs-wrapper .button-wrapper .button-letter,
 .register-page-wrapper .change-profile-section .inputs-wrapper .button-wrapper .button-letter,
 .change-profile-page-wrapper .register-section .inputs-wrapper .button-wrapper .button-letter,
