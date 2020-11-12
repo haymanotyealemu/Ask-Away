@@ -3,7 +3,7 @@ import {
     CHANGE_USER_DATA_FAILED,
   } from "../../constants/auth.constants";
   import axios from "axios";
-  
+  import { userLoaded } from "./userLoaded";
   export const changeUserData = (changeUserData, userDataToChange) => async (
     dispatch
   ) => {
@@ -23,6 +23,7 @@ import {
         type: CHANGE_PROFILE,
         payload: response.data,
       });
+      dispatch(userLoaded());
       alert("Data has changed");
     } catch (error) {
       dispatch({
