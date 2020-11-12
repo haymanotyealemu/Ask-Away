@@ -59,7 +59,7 @@ const CreatePost = ({ createPost }) => {
         />
         <div
           onClick={() => submitData()}
-          className="app_color_background add-post-button font__p font__bold"
+          className="app_color_background add-post-button font__p font__bold" style={{"padding": "2px"}}
         >
           Add post
         </div>

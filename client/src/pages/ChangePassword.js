@@ -2,22 +2,18 @@ import React, { useState } from "react";
 import { checkPasswords } from "../actions/auth.actions/checkPasswords";
 import { changePassword } from "../actions/auth.actions/changePassword";
 import { connect } from "react-redux";
-import ErrorMessage from "../components/ErrorMessage";
-import PasswordChangeMessage from "../components/PasswordChangeMessage";
 
 const ChangePassword = ({
   auth: { errors, isAllowedToChangePassword },
   checkPasswords,
   changePassword,
 }) => {
-  let [isSubmitted, setIsSubmitted] = useState(false);
   let [areNotPasswordsFullfiled, setAreNotPasswordsFullfiled] = useState(false);
   let [arePasswordsWrong, setArePasswordsWrong] = useState(false);
   let [formData, setFormData] = useState({
     firstPassword: "",
     secondPassword: "",
     newPassword: "",
-    
   });
 
   let { firstPassword, secondPassword, newPassword } = formData;
@@ -41,15 +37,20 @@ const ChangePassword = ({
       checkPasswords(firstPassword);
     }
   };
-  // const submitNewPasswordData = ({newPassword}) =>{
-  //   if (newPassword === null || ""){
-  //     alert("Password hasn't changed, something went wrong...");
-  //   }
-  //   else{
-  //     changePassword(newPassword);
-  //     alert("Password has changed");
-  //   }
-  // }
+  const submitNewPasswordData = () =>{
+    if (newPassword === "" || newPassword === null){
+  
+      alert("Password hasn't changed, something went wrong...");
+    }
+    else if(newPassword.length > 12 || newPassword.length < 6){
+      alert("Password length must be between 6 and 12 characters");
+    }
+    else{
+      changePassword(newPassword);
+      
+      alert("Password has changed");
+    }
+  }
 
   return (
     <div className="change-profile-page-wrapper">
@@ -83,17 +84,7 @@ const ChangePassword = ({
             />
           </div>
 
-          {/* {areNotPasswordsFullfiled && (
-            <ErrorMessage errorMessage="You haven't fullfiled some input" />
-          )}
-
-          {arePasswordsWrong && (
-            <ErrorMessage errorMessage="Passwords are wrong" />
-          )}
-
-          {errors === false && (errors !== {} || errors !== null) && (
-            <ErrorMessage errorMessage="Something went wrong..." />
-          )} */}
+          
           <div className="password-page-button" style={{
             marginTop: ".5em",
             }} onClick={(e) => submitData(e)}>
@@ -121,21 +112,19 @@ const ChangePassword = ({
               style={{
                 marginTop: ".5em",
               }}
-              onClick={() => {
-                changePassword(newPassword);
-                setIsSubmitted(true);
-              }}> Submit
+              onClick={(e) => submitNewPasswordData(e)}>
+                Submit
             </div>
           </div>
         </form>
       )}
-      {isAllowedToChangePassword && errors && isSubmitted && (
+      {/* {isAllowedToChangePassword && errors && isSubmitted && (
         <PasswordChangeMessage message="Password hasn't changed, something went wrong..." />
       )}
 
       {isAllowedToChangePassword && !errors && isSubmitted && (
         <PasswordChangeMessage message="Password has changed" />
-      )}
+      )} */}
     </div>
   );
 };

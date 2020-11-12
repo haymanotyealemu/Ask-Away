@@ -17,7 +17,7 @@ const TopicPost = ({
 }) => {
   return (
     <div className="topic-wrapper">
-      <div className="topic-date">
+      <div className="topic-date mr-2em">
         <Moment format="HH:mm YYYY-MM-DD">{post.date}</Moment>
       </div>
 
@@ -29,7 +29,7 @@ const TopicPost = ({
       <div className="topic-section">
         <p>{post.postText}</p>
         <div className="topic-section-links">
-          <div className="like-section" style={{ color: "rgb(42, 9, 9)" }}>
+          <div className="like-section" style={{ color: "#388E3C" }}>
             <div
               className="font__p font__bold p__size like-item"
               onClick={() => {
@@ -61,7 +61,7 @@ const TopicPost = ({
                     ? "fas fa-thumbs-up"
                     : "far fa-thumbs-up"
                 }
-              ></i>
+                style={{ color: "#388E3C" }}></i>
             </div>
 
             <div className="font__p font__bold p__size likes-length-item">
@@ -69,8 +69,8 @@ const TopicPost = ({
             </div>
           </div>
 
-          <div className="topic-comment-section font__p font__bold p__size">
-            <i className="far fa-comment"></i>
+          <div className="topic-comment-section font__p font__bold p__size"style={{ color: "#3949AB " }}>
+            <i className="fas fa-comment"></i>
             {post.comments.length}
           </div>
 

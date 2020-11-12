@@ -3,7 +3,6 @@ import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import Account from "./pages/Account";
-import ContactPage from "./pages/ContactPage";
 import ChangeProfile from "./pages/ChangeProfile";
 import UserProfile from "./pages/UserProfile.js";
 import TopicPage from "./pages/TopicPage";
@@ -21,6 +20,7 @@ import PrivateRoute from "./routes/PrivateRoute";
 import "./App.css";
 import ChangePassword from "./pages/ChangePassword";
 import MyProfile from "./pages/MyProfile";
+import { FooterContainer } from './containers/footer'
 
 if (localStorage.getItem("token")) {
   setAuthenticationToken(localStorage.getItem("token"));
@@ -36,7 +36,6 @@ const App = () => {
         <Navbar />
         <Switch>
           <Route path="/" exact component={LandingPage} />
-          <Route path="/contact-us" exact component={ContactPage} />
           <Route path="/users" exact component={Users} />
           <Route path="/topics" exact component={Topics} />
           <Route path="/users/user/:user_id" exact component={UserProfile} />
@@ -62,6 +61,7 @@ const App = () => {
           />
         </Switch>
       </Provider>
+      <FooterContainer />
     </Router>
   );
 };

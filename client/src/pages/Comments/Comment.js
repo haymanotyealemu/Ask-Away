@@ -32,7 +32,7 @@ const Comment = ({
         <div className="topic-section-links">
           <div
             className="like-section"
-            style={{ color: "rgb(42, 9, 9)" }}
+            style={{ color: "#388E3C" }}
             onClick={() => {
               if (comment.likes.find((like) => like.user === auth.user._id)) {
                 comment.likes.find((like) =>

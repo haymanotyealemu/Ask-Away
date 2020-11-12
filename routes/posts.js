@@ -38,7 +38,7 @@ router.get('/:post_id', getPostById);
 
 router.get('/user_posts/:user_id', getUsersPostsById);
 
-router.get('/user_posts', authentication, getUserPostsByMiddleware);
+router.get("/user_posts", authentication, getUserPostsByMiddleware);
 
 router.post('/', authentication, createPostValidator, createPost);
 

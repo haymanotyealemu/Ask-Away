@@ -1,7 +1,5 @@
 const Post = require('../../models/Post');
 
-// get user posts by middleware
-
 module.exports = async (req, res) => {
   try {
     let posts = await Post.find();
@@ -11,6 +9,6 @@ module.exports = async (req, res) => {
     res.json(userPosts);
   } catch (error) {
     console.error(error);
-    return res.status(500).send('Server error');
+    return res.status(500).json("Server Error...");
   }
 };

@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Kaushan+Script|Asap+Condensed&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Philosopher&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif:ital@1&display=swap');
 html {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -7,7 +8,10 @@ html {
     background-color:#ECEFF1 ;
 
 }
-
+html body {
+    margin: 0;
+    padding: 0;
+}
 
 html body .flex__center {
     display: -webkit-box;
@@ -42,11 +46,6 @@ html body .p__size {
     font-family: Kaushan Script;
     font-weight: bold;
 }
-
-/* .image {
-    width: 80%;
-    height: 80%
-} */
 
 
 @media (min-width: 1024px) {
@@ -102,7 +101,7 @@ html body .main__nav {
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     width: 100vw;
-    height: 15vh;
+    height: 10vh;
     background-color:#17202A;
 
 }
@@ -175,7 +174,6 @@ html body .main__nav .nav-links {
     -ms-flex-align: center;
     align-items: center;
     
-    
 }
 
 @media (min-width: 1024px) {
@@ -188,8 +186,7 @@ html body .main__nav .nav-links .nav__link {
     font-size: 1.5em;
     -webkit-transition: border 0.2s ease-in-out;
     transition: border 0.2s ease-in-out;
-    float: left;
-    color: whitesmoke
+    color: whitesmoke;
 }
 
 @media (max-width: 1024px) {
@@ -280,26 +277,8 @@ html body .sidebar-wrapper .sidebar-links .sidebar-link {
     text-decoration: none;
     font-size: 1.5em;
 }
-html body .landing .bg-image{
-    background-image: url("./landing.jpg");
-    position: fixed;
-    min-width: 100%;
-    max-height: 50vh;
-    background-size: cover;
-    background-position: center;
-    margin-top: 0em;
-    background-repeat: no-repeat;
-}
-.landing .bg-image .centered{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-font-size: 24px;
-}
-html body .landing,
-html body .dashboard-wrapper {
+
+html body .landing-wrapper , html body .dashboard-wrapper{
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -309,12 +288,11 @@ html body .dashboard-wrapper {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    height: 80vh; 
-}
+    height: 80vh;
+} 
 
 @media (min-width: 1024px) {
-    html body .landing,
-    html body .dashboard-wrapper {
+    html body .landing-wrapper, html body .dashboard-wrapper{
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
@@ -324,17 +302,15 @@ html body .dashboard-wrapper {
         -webkit-box-align: start !important;
         -ms-flex-align: start !important;
         align-items: flex-start !important;
-         height: 90vh; 
+        height: 85vh; 
     }
-} */
+}
 
- html body .landing-wrapper .image-wrapper,
 html body .dashboard-wrapper .image-wrapper {
     display: none;
-} 
+}
 
 @media (min-width: 1024px) {
-    html body .landing-wrapper .image-wrapper,
     html body .dashboard-wrapper .image-wrapper {
         width: 50vw;
         height: 100%;
@@ -349,7 +325,6 @@ html body .dashboard-wrapper .image-wrapper {
         align-items: center;
     }
 }
-
 html body .landing-wrapper .image-wrapper .landing-image,
 html body .landing-wrapper .image-wrapper .dashboard-image,
 html body .dashboard-wrapper .image-wrapper .landing-image,
@@ -361,15 +336,13 @@ html body .dashboard-wrapper .image-wrapper .dashboard-image {
     background-size: cover;
 }
 
-html body .landing .text-wrapper,
-html body .dashboard-wrapper .text-wrapper {
+
+html body .landing-wrapper .text-wrapper, .dashboard-wrapper .text-wrapper {
     width: 80vw;
-}  
-
-
+}
 @media (min-width: 1024px) {
-    html body .landing .text-wrapper,
-    html body .dashboard-wrapper .text-wrapper {
+    html body .landing-wrapper .text-wrapper,.dashboard-wrapper .text-wrapper
+    {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
@@ -388,7 +361,8 @@ html body .dashboard-wrapper .text-wrapper {
     }
 }
 
-html body .landing .text-wrapper .text-header-wrapper,
+
+html body .landing-wrapper .text-wrapper .text-header-wrapper,
 html body .dashboard-wrapper .text-wrapper .text-header-wrapper {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -401,7 +375,7 @@ html body .dashboard-wrapper .text-wrapper .text-header-wrapper {
     align-items: center;
 }
 
-html body .landing .text-wrapper .text-header-wrapper span,
+html body .landing-wrapper .text-wrapper .text-header-wrapper span,
 html body .dashboard-wrapper .text-wrapper .text-header-wrapper span {
     color: #3cd1fd;
     font-family: "Kaushan Script", sans-serif;
@@ -439,7 +413,7 @@ html body .href__style__remove {
     text-decoration: none;
     color: #0b0a0a;
     cursor: pointer;
-} */
+} 
 
 .account-page-wrapper {
     margin-top: 10em;
@@ -573,6 +547,7 @@ html body .href__style__remove {
     border-right: 1px solid #2a0909;
 }
 
+
 @media (min-width: 1024px) {
     .account-page-wrapper .user-posts .user-posts-header-wrapper {
         width: 92%;
@@ -580,7 +555,8 @@ html body .href__style__remove {
 }
 
 .account-page-wrapper .user-posts .user-posts-header-wrapper .user-posts-header {
-    color: #f4f4f4;
+    color: #1B2631;
+    font-family: 'PT Serif', serif;
 }
 
 .account-page-wrapper .user-posts .user-post {
@@ -762,6 +738,7 @@ html body .href__style__remove {
 @media (min-width: 1024px) {
     .make-post-wrapper .tips-wrapper form {
         width: 30%;
+        border-radius: 25px;
     }
 }
 
@@ -769,6 +746,7 @@ html body .href__style__remove {
     width: 100%;
     height: 77px;
     resize: none;
+    border-radius: 20px;
 }
 
 .make-post-wrapper .tips-wrapper form .add-post-button {
@@ -788,12 +766,13 @@ html body .href__style__remove {
     color: #f4f4f4;
     -webkit-transition: background 0.2s ease-in-out;
     transition: background 0.2s ease-in-out;
-    padding: 5px 0;
+    padding: 5px;
+    border-radius: 20px;
 }
 
 .make-post-wrapper .tips-wrapper form .add-post-button:hover {
     cursor: pointer;
-    background: #39c6f1;
+    background: #CC9900;
 }
 
 @media (min-width: 1024px) {
@@ -1258,17 +1237,22 @@ html body .href__style__remove {
 .change-profile-page-wrapper .register-section .inputs-wrapper input,
 .change-profile-page-wrapper .change-profile-section .inputs-wrapper input {
     margin: 0.25em 0;
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    border: 0.5px  rgba(0, 0, 0, 0.05);
     width: 80%;
     padding: 0.75em 0em;
     background-color: cornsilk;
+    border-radius: 25px;
 }
 
 textarea {
     width: 50vw;
     height: 77px;
     resize: none;
+    border-radius: 25px;
+
+    
 }
+
 
 @media (min-width: 1024px) {
     textarea {
@@ -1344,6 +1328,7 @@ textarea {
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
+   
 }
 
 .topics-header .search-topic-wrapper .topic-search-button,
@@ -1393,6 +1378,7 @@ textarea {
     .users-header .search-user-wrapper .topic-search-button,
     .users-header .search-user-wrapper .user-search-button {
         width: 30%;
+        border-radius: 25px;
     }
 }
 
@@ -1409,7 +1395,7 @@ textarea {
 .users-header .search-user-wrapper .topic-search-button:hover,
 .users-header .search-user-wrapper .user-search-button:hover {
     cursor: pointer;
-    background: #39c6f1;
+    background:#7D6608;
 }
 
 .link-to-post-page-button {
@@ -1432,7 +1418,7 @@ textarea {
 
 @media (min-width: 1024px) {
     .link-to-post-page-button {
-        height: 50px !important;
+        height: 60px !important;
         width: 100px !important;
         
     }
@@ -1458,7 +1444,7 @@ textarea {
 
 .link-to-post-page-button:hover {
     cursor: pointer;
-    background: #39c6f1;
+    background: #7D6608 ;
 }
 
 .comments-align-left {
@@ -1511,10 +1497,11 @@ textarea {
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     border: 1px solid #2a0909;
-    background: #fff;
+    background: #F1F8E9 ;
     width: 99%;
     margin-bottom: 0.5em;
     padding: 1em 0;
+    border-radius: 25px;
 }
 
 @media (min-width: 1024px) {

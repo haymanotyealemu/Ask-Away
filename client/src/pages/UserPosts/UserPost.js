@@ -24,10 +24,10 @@ const UserPost = ({ post, removePost, auth }) => {
       <div className="post__likes__comments__deleteBtn-wrapper">
         <div className="post__likes__comments__deleteBtn">
           <div className="user-post-likes">
-            <i className="far fa-thumbs-up"></i> {post.likes.length}
+            <i className="far fa-thumbs-up" style={{ color: "#388E3C" }}></i> {post.likes.length}
           </div>
           <div className="user-post-comments">
-            <i className="far fa-comment"></i>
+            <i className="fas fa-comment" style={{ color: "#3949AB" }}></i>
             {post.comments.length}
           </div>
 
@@ -44,7 +44,7 @@ const UserPost = ({ post, removePost, auth }) => {
             </div>
           </div>
 
-          <div className="link-to-post-page-button app_color_background font__p font__bold p__size">
+          <div className="link-to-post-page-button app_color_background font__p font__bold p__size ">
             <Link to={`/topics/topic/${post._id}`}>View More</Link>
           </div>
         </div>

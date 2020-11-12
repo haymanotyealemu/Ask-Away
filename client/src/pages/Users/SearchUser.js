@@ -19,15 +19,15 @@ const SearchUser = ({getUsers, searchByUsername}) => {
       <p className="app_color_font font__bold font__p users-headline">Users</p>
       <br />
 
-      <form className="search-user-wrapper">
-        <textarea
+      <form className="search-user-wrapper" style={{ 'border-radius': '25px'}}>
+        <textarea style={{ 'border-radius': '25px', 'backgroundColor':"#FFFFFF  "}}
           type="submit"
           onChange={(e) => onChange(e)}
           value={searchedUsername}
         />
 
         <div
-          className="user-search-button app_color_background font__p font__bold"
+          className="user-search-button app_color_background font__p font__bold"style={{ 'border-radius': '25px'}}
           onClick={() => searchForUser()}
         >
           Search for user

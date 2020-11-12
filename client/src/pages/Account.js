@@ -1,12 +1,12 @@
 import React from "react";
-import comment3 from "../comment3.jpg";
+import account from "../account.png";
 import { Link } from "react-router-dom";
 
 const Account = () => {
   return (
     <div className="dashboard-wrapper">
       <div className="image-wrapper">
-        <img src={comment3} alt="" className="dashboard-image" />
+        <img src={account} alt="" className="dashboard-image" />
       </div>
 
       <div className="dashboard-links-wrapper">
@@ -22,11 +22,11 @@ const Account = () => {
             </Link>
           </div>
 
-          <div className="dashboard-link font__p font__bold p__size">
+          {/* <div className="dashboard-link font__p font__bold p__size">
             <Link to="/contact-us" className="dashboard-link-href">
               Contact Us
             </Link>
-          </div>
+          </div> */}
 
           <div className="dashboard-link font__p font__bold p__size">
             <Link to="/change-password" className="dashboard-link-href">

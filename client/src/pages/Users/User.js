@@ -5,8 +5,8 @@ const User = ({ user }) => {
   return (
     <div className="topic-wrapper">
       <div className="topic-user">
-        <img src={user.avatar} className="topic-avatar" alt="" />
-        <p className="font__p p__size">{user.userName}</p>
+        <img src={user.avatar} className="topic-avatar rounded" alt="" />
+        <p className="font__p p__size text-center"style={{'backgroundColor':'#A5D6A7'}}>{user.userName}</p>
       </div>
 
       <div className="topic-section">

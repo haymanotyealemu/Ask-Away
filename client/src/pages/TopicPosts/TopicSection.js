@@ -40,7 +40,7 @@ const TopicSection = ({
                     ? "fas fa-thumbs-up"
                     : "far fa-thumbs-up"
                 }
-              ></i>
+                style={{ color: "#388E3C" }}></i>
               {post.likes.length}
             </p>
           </div>
